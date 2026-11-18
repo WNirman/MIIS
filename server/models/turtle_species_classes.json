@@ -1,0 +1,47 @@
+{
+  "0": {
+    "scientific": "Lepidochelys olivacea",
+    "common_en": "Olive Ridley Sea Turtle",
+    "common_si": "බොත්තු කැස්බෑවා (බටු කැස්බෑවා)",
+    "common_ta": "சிற்றாமை (ஒலிவ் நிற ஆமை)",
+    "iucn": "Vulnerable (VU)",
+    "features": "6 to 9 pairs of lateral costal scutes, olive green carapace",
+    "typical_threats": "Ghost net entanglement in monsoon drift lines"
+  },
+  "1": {
+    "scientific": "Chelonia mydas",
+    "common_en": "Green Sea Turtle",
+    "common_si": "ගල් කැස්බෑවා (වැලි කැස්බෑවා)",
+    "common_ta": "பச்சை ஆமை",
+    "iucn": "Endangered (EN)",
+    "features": "4 pairs of lateral scutes, single pair of prefrontal scales",
+    "typical_threats": "Nesting disturbance, plastic ingestion"
+  },
+  "2": {
+    "scientific": "Eretmochelys imbricata",
+    "common_en": "Hawksbill Sea Turtle",
+    "common_si": "පොතු කැස්බෑවා (ලෙලි කැස්බෑවා)",
+    "common_ta": "அழுங்காமணி ஆமை",
+    "iucn": "Critically Endangered (CR)",
+    "features": "Overlapping imbricate scutes, raptorial hawk-like beak",
+    "typical_threats": "Illegal tortoiseshell trade, coral reef loss"
+  },
+  "3": {
+    "scientific": "Dermochelys coriacea",
+    "common_en": "Leatherback Sea Turtle",
+    "common_si": "දාර කැස්බෑවා (තුන් දාර කැස්බෑවා)",
+    "common_ta": "தோலாமை",
+    "iucn": "Vulnerable (VU)",
+    "features": "7 longitudinal dorsal ridges on black leathery skin",
+    "typical_threats": "Pelagic plastic ingestion, longline bycatch"
+  },
+  "4": {
+    "scientific": "Caretta caretta",
+    "common_en": "Loggerhead Sea Turtle",
+    "common_si": "ඔලුගෙඩි කැස්බෑවා",
+    "common_ta": "பெருந்தலை ஆமை",
+    "iucn": "Vulnerable (VU)",
+    "features": "5 pairs of costal scutes, massive cranial crushing jaw",
+    "typical_threats": "Bottom trawling bycatch"
+  }
+}

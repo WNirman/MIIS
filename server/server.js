@@ -15,6 +15,14 @@ import {
   insertReward
 } from './db.js';
 import { processWithGemini } from './ai_extractor.js';
+import { calculateTurtleConfidenceScore, SRI_LANKA_SEA_TURTLE_SPECIES } from './species_data.js';
+
+import { execFile } from 'child_process';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 dotenv.config();
 
@@ -26,6 +34,66 @@ app.use(express.json());
 
 // Initialize SQLite database
 initDatabase();
+
+// Turtle Species AI & Computer Vision Classification Endpoint
+app.post('/api/ai/classify-turtle', (req, res) => {
+  try {
+    const { image_url, notes, taxon_group, species_guess } = req.body;
+    const pythonScript = path.join(__dirname, 'models', 'turtle_vision_service.py');
+    const hintText = `${taxon_group || ''} ${species_guess || ''} ${notes || ''}`;
+    const imgParam = image_url || '';
+
+    execFile('python', [pythonScript, imgParam, hintText], { encoding: 'utf-8' }, (error, stdout, stderr) => {
+      if (error || !stdout) {
+        // Fallback to JS evaluator
+        const evaluation = calculateTurtleConfidenceScore(req.body);
+        return res.json({
+          success: true,
+          engine: "Rule & Taxonomy Fallback",
+          predicted_species: evaluation.predicted_species,
+          confidence_score: evaluation.confidence_score,
+          evidence_points: evaluation.evidence_points
+        });
+      }
+
+      try {
+        const parsed = JSON.parse(stdout);
+        res.json({
+          success: true,
+          ...parsed
+        });
+      } catch (parseErr) {
+        const evaluation = calculateTurtleConfidenceScore(req.body);
+        res.json({
+          success: true,
+          engine: "Taxonomy Engine",
+          predicted_species: evaluation.predicted_species,
+          confidence_score: evaluation.confidence_score
+        });
+      }
+    });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// Turtle Species AI Verification & Confidence Assistant Endpoint
+app.post('/api/ai/turtle-verify', async (req, res) => {
+  try {
+    const observationData = req.body;
+    const evaluation = calculateTurtleConfidenceScore(observationData);
+    res.json({
+      success: true,
+      species_catalog: SRI_LANKA_SEA_TURTLE_SPECIES,
+      predicted_species: evaluation.predicted_species,
+      confidence_score: evaluation.confidence_score,
+      evidence_points: evaluation.evidence_points,
+      morphological_key: evaluation.morphological_key
+    });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
 
 // Clear database endpoint
 app.post('/api/clear', (req, res) => {
@@ -178,51 +246,87 @@ app.post('/api/reports', async (req, res) => {
   }
 });
 
-// 3. Multi-Platform Social Media Harvester (DWC, MEPA, Pearl Protectors, Coast Guard Feeds)
+// 3. Multi-Platform Social Media Harvester (Real Meta Graph API & Twitter API)
 app.post('/api/social/harvest', async (req, res) => {
   try {
     const { platform = 'All', keyword = 'marine wildlife Sri Lanka' } = req.body;
+    const realFetchedPosts = [];
 
-    const conservationPosts = [
-      {
-        id: `dwc_post_${Date.now()}_1`,
-        platform: 'Facebook (DWC Sri Lanka Feed)',
-        user: 'Department of Wildlife Conservation Sri Lanka',
-        text: 'OFFICIAL REPORT: Live stranded Humpback Whale calf discovered near Pigeon Island National Park, Trincomalee. DWC Eastern Province marine rescue team dispatched with veterinary officers. Coordinates 8.718N, 81.205E. Public advised to keep safe distance. #DWC #PigeonIsland #WhaleStranding',
-        created_at: '2026-07-23T14:30:00Z',
-        url: 'https://facebook.com/dwcsrilanka/posts/101'
-      },
-      {
-        id: `mepa_post_${Date.now()}_2`,
-        platform: 'Facebook (MEPA Feed)',
-        user: 'Marine Environment Protection Authority (MEPA)',
-        text: 'POLLUTION ALERT: Heavy bunker oil slick washed ashore along 2km stretch of Galle Fort and harbor coast. Over 80 dead reef fish and crabs documented. MEPA response team conducting shoreline containment. #MEPA #GalleOilSpill #MarinePollution',
-        created_at: '2026-07-22T19:15:00Z',
-        url: 'https://facebook.com/mepasrilanka/posts/102'
-      },
-      {
-        id: `pp_post_${Date.now()}_3`,
-        platform: 'Facebook (Pearl Protectors Feed)',
-        user: 'The Pearl Protectors (Marine Conservation)',
-        text: 'INCIDENT REPORT: Decomposed Olive Ridley sea turtle washed ashore entangled in monofilament ghost net at Mount Lavinia beach, Colombo. Approx 6.838N, 79.863E. Reported to DWC turtle protection unit. #PearlProtectors #GhostNet #TurtleConservation',
-        created_at: '2026-07-23T09:40:00Z',
-        url: 'https://facebook.com/pearlprotectors/posts/103'
-      },
-      {
-        id: `cg_post_${Date.now()}_4`,
-        platform: 'Facebook (Coast Guard Feed)',
-        user: 'Sri Lanka Coast Guard Marine Safety',
-        text: 'ALERT: Dugong carcass spotted floating near Gulf of Mannar marine boundary near Kalpitiya spit. Coordinates ~8.231N, 79.742E. Marine mammal research team notified for autopsy. #CoastGuard #Mannar #Dugong',
-        created_at: '2026-07-20T16:00:00Z',
-        url: 'https://facebook.com/coastguardsl/posts/105'
+    // 1. Genuine Meta Graph API Search (If token configured)
+    const metaToken = process.env.FACEBOOK_ACCESS_TOKEN || process.env.FACEBOOK_PAGE_ACCESS_TOKEN;
+    if (metaToken && (platform === 'Facebook' || platform === 'Instagram' || platform === 'All')) {
+      try {
+        const pageId = '1290098300852019'; // Marine Incidents Page
+        const metaUrl = `https://graph.facebook.com/v19.0/${pageId}/feed?fields=id,message,created_time,full_picture&access_token=${metaToken}&limit=5`;
+        const metaResp = await fetch(metaUrl);
+        if (metaResp.ok) {
+          const metaJson = await metaResp.json();
+          if (metaJson.data && metaJson.data.length > 0) {
+            for (const item of metaJson.data) {
+              if (item.message) {
+                realFetchedPosts.push({
+                  id: `meta_${item.id}`,
+                  platform: 'Meta Facebook Page',
+                  user: 'Marine Incidents',
+                  text: item.message,
+                  created_at: item.created_time || new Date().toISOString(),
+                  url: `https://facebook.com/${item.id}`,
+                  image: item.full_picture || ''
+                });
+              }
+            }
+          }
+        }
+      } catch (metaErr) {
+        console.warn('[Meta API] Live query notice:', metaErr.message);
       }
-    ];
+    }
 
+    // 2. Genuine Twitter / X API Search (If token configured)
+    const twitterBearer = process.env.TWITTER_BEARER_TOKEN;
+    if (twitterBearer && (platform === 'Twitter' || platform === 'All')) {
+      try {
+        const query = encodeURIComponent(`${keyword} Sri Lanka -is:retweet`);
+        const twitterUrl = `https://api.twitter.com/2/tweets/search/recent?query=${query}&tweet.fields=created_at,author_id,text&max_results=10`;
+        const twResp = await fetch(twitterUrl, {
+          headers: { Authorization: `Bearer ${twitterBearer}` }
+        });
+        if (twResp.ok) {
+          const twJson = await twResp.json();
+          if (twJson.data && twJson.data.length > 0) {
+            for (const tweet of twJson.data) {
+              realFetchedPosts.push({
+                id: `tw_${tweet.id}`,
+                platform: 'Twitter / X',
+                user: `@user_${tweet.author_id}`,
+                text: tweet.text,
+                created_at: tweet.created_at || new Date().toISOString(),
+                url: `https://twitter.com/i/web/status/${tweet.id}`,
+                image: ''
+              });
+            }
+          }
+        }
+      } catch (twErr) {
+        console.warn('[Twitter API] Live query notice:', twErr.message);
+      }
+    }
+
+    // If zero real posts returned from live APIs, return genuine 0 result response (NO FAKE MOCK DATA)
+    if (realFetchedPosts.length === 0) {
+      return res.json({
+        success: true,
+        count: 0,
+        message: `Live ${platform} API query executed for "${keyword}". No active live posts currently matched the keyword query stream. Zero mock data generated.`,
+        data: []
+      });
+    }
+
+    // Process only genuine fetched posts with Gemini AI
     const processedPosts = [];
-
-    for (const post of conservationPosts) {
+    for (const post of realFetchedPosts) {
       const aiResult = await processWithGemini(post.text);
-      const incidentId = `INC-MARINE-${Math.floor(1000 + Math.random() * 9000)}`;
+      const incidentId = `INC-SOCIAL-${Date.now()}-${Math.floor(100 + Math.random() * 900)}`;
 
       const incidentRecord = {
         incident_id: incidentId,
@@ -230,44 +334,44 @@ app.post('/api/social/harvest', async (req, res) => {
         event_date_precision: 'Exact',
         report_date: new Date().toISOString().split('T')[0],
         country: 'Sri Lanka',
-        province: aiResult.province || 'Eastern Province',
-        district: aiResult.district || 'Trincomalee',
+        province: aiResult.province || 'Western Province',
+        district: aiResult.district || 'Colombo',
         ds_division: '',
-        nearest_town: aiResult.nearest_town || 'Trincomalee',
-        location_name: aiResult.location_name || 'Coastal Sanctuary',
+        nearest_town: aiResult.nearest_town || 'Coastal Zone',
+        location_name: aiResult.location_name || 'Sri Lanka Coast',
         original_location_text: post.text,
-        site_type: `Official Marine Conservation Feed`,
-        latitude: aiResult.latitude,
-        longitude: aiResult.longitude,
-        spatial_precision: aiResult.spatial_precision,
-        coordinate_confidence: 'high',
-        coordinate_source: `${post.user} Feed + Gemini AI`,
-        gps_accuracy_m: 20,
-        uncertainty_radius_km: 0.1,
-        distance_to_coast_km: 0.02,
+        site_type: `Live Social Media Post (${post.platform})`,
+        latitude: aiResult.latitude || 6.9271,
+        longitude: aiResult.longitude || 79.8612,
+        spatial_precision: aiResult.spatial_precision || 'Town Level Geocoded',
+        coordinate_confidence: 'medium',
+        coordinate_source: `${post.platform} + Gemini AI`,
+        gps_accuracy_m: 50,
+        uncertainty_radius_km: 0.5,
+        distance_to_coast_km: 0.05,
         location_validation_status: 'AI Geocoded',
-        event_type: aiResult.event_type,
-        taxon_group: aiResult.taxon_group,
-        species_common: aiResult.species_common,
-        species_scientific: aiResult.species_scientific,
-        condition_status: aiResult.condition_status,
-        number_dead: aiResult.number_dead || (aiResult.condition_status === 'Dead' ? 1 : 0),
-        number_alive: aiResult.number_alive || (aiResult.condition_status === 'Alive' ? 1 : 0),
+        event_type: aiResult.event_type || 'Stranding & Animal Death',
+        taxon_group: aiResult.taxon_group || 'Marine Wildlife',
+        species_common: aiResult.species_common || 'Marine Specimen',
+        species_scientific: aiResult.species_scientific || 'Marine fauna',
+        condition_status: aiResult.condition_status || 'Dead',
+        number_dead: aiResult.number_dead || 1,
+        number_alive: aiResult.number_alive || 0,
         quantity_text: `1 specimen`,
         number_precision: 'exact',
-        cause_category: aiResult.cause_category,
-        suspected_cause: aiResult.suspected_cause,
-        cause_certainty: 'High',
-        urgency_level: aiResult.urgency_level,
-        response_status: 'Official Report - Dispatched Response',
-        confidence_score: 95,
-        confidence_class: 'High confidence',
-        validation_level: 'Level 2',
-        validation_status: 'Auto-validated',
+        cause_category: aiResult.cause_category || 'Marine Incident',
+        suspected_cause: aiResult.suspected_cause || 'Social media reported incident',
+        cause_certainty: 'Medium',
+        urgency_level: aiResult.urgency_level || 'medium',
+        response_status: 'Social Media Alert - Pending Dispatch',
+        confidence_score: aiResult.confidence_score || 80,
+        confidence_class: 'Medium confidence',
+        validation_level: 'Level 1',
+        validation_status: 'Pending Verification',
         duplicate_group_id: null,
         public_visibility: 'Public',
-        sensitive_location: post.text.includes('turtle') ? 1 : 0,
-        notes: `Official report from ${post.user}`,
+        sensitive_location: post.text.toLowerCase().includes('turtle') ? 1 : 0,
+        notes: `Real live post from ${post.user}: ${post.text}`,
         created_at: post.created_at,
         updated_at: new Date().toISOString()
       };
@@ -277,30 +381,29 @@ app.post('/api/social/harvest', async (req, res) => {
       const sourceRecord = {
         source_id: post.id,
         incident_id: incidentId,
-        source_type: `Facebook Conservation Feed`,
+        source_type: post.platform,
         source_name: post.user,
         source_url: post.url,
         archive_url: '',
-        title: `Official Report: ${aiResult.taxon_group} ${aiResult.event_type}`,
+        title: `Social Report: ${aiResult.taxon_group || 'Marine Incident'}`,
         author: post.user,
         publication_date: new Date(post.created_at).toISOString().split('T')[0],
         language: 'en',
         raw_text_path: '',
-        media_path: '',
-        credibility_score: 98,
-        evidence_sentence: aiResult.evidence_sentence,
-        source_confidence: 'High'
+        media_path: post.image || '',
+        credibility_score: 85,
+        evidence_sentence: aiResult.evidence_sentence || post.text,
+        source_confidence: 'Medium'
       };
 
       insertSource(sourceRecord);
-      processedPosts.push({ post, aiResult, incidentId });
+      processedPosts.push(incidentRecord);
     }
 
     res.json({
       success: true,
-      message: `Ingested ${processedPosts.length} Marine Conservation Posts (DWC, MEPA, Pearl Protectors, Coast Guard).`,
-      platform,
-      query: keyword,
+      count: processedPosts.length,
+      message: `Successfully harvested and AI-triaged ${processedPosts.length} real live social media incidents!`,
       data: processedPosts
     });
   } catch (err) {

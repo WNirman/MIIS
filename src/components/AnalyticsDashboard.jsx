@@ -1,7 +1,10 @@
 import React from 'react';
 import { BarChart3, Download, PieChart, TrendingUp, ShieldAlert, Award, FileSpreadsheet, MapPin } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function AnalyticsDashboard({ stats, incidents }) {
+  const { t } = useLanguage();
+
   const handleExportCSV = () => {
     const headers = ['Incident ID', 'Event Date', 'District', 'Town', 'Taxon', 'Species', 'Condition', 'Latitude', 'Longitude', 'Urgency', 'Validation Status'];
     const rows = incidents.map(i => [
@@ -27,10 +30,10 @@ export default function AnalyticsDashboard({ stats, incidents }) {
         <div className="space-y-1">
           <div className="flex items-center space-x-2 text-cyan-400 text-xs font-bold uppercase tracking-wider">
             <BarChart3 className="w-4 h-4" />
-            <span>National Scientific & Public Analytics Dashboard</span>
+            <span>{t('analyticsTitle')}</span>
           </div>
-          <h2 className="text-2xl font-extrabold text-white">Marine Wildlife Incident Indicators</h2>
-          <p className="text-xs text-slate-300">Spatial-temporal trends, taxon hotspots, cause breakdown, and open research data export.</p>
+          <h2 className="text-2xl font-extrabold text-white">{t('analyticsTitle')}</h2>
+          <p className="text-xs text-slate-300">{t('analyticsSub')}</p>
         </div>
 
         <button
@@ -45,13 +48,13 @@ export default function AnalyticsDashboard({ stats, incidents }) {
       {/* Primary Key Performance Indicators (KPIs) */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <div className="glass-panel p-5 rounded-2xl border border-slate-800 space-y-2">
-          <span className="text-xs text-slate-400 uppercase tracking-wider font-semibold block">Total Incidents</span>
+          <span className="text-xs text-slate-400 uppercase tracking-wider font-semibold block">{t('statTotalIncidents')}</span>
           <div className="text-3xl font-black text-cyan-400 font-mono">{stats?.summary?.totalIncidents || 5}</div>
           <div className="text-[11px] text-slate-400">Validated Georeferenced Database</div>
         </div>
 
         <div className="glass-panel p-5 rounded-2xl border border-slate-800 space-y-2">
-          <span className="text-xs text-slate-400 uppercase tracking-wider font-semibold block">Expert Verified</span>
+          <span className="text-xs text-slate-400 uppercase tracking-wider font-semibold block">{t('statVerified')}</span>
           <div className="text-3xl font-black text-emerald-400 font-mono">{stats?.summary?.verifiedIncidents || 3}</div>
           <div className="text-[11px] text-emerald-400/80 font-bold">Level 3 / Level 4 Confirmed</div>
         </div>
@@ -63,7 +66,7 @@ export default function AnalyticsDashboard({ stats, incidents }) {
         </div>
 
         <div className="glass-panel p-5 rounded-2xl border border-slate-800 space-y-2">
-          <span className="text-xs text-slate-400 uppercase tracking-wider font-semibold block">Social Media Ingested</span>
+          <span className="text-xs text-slate-400 uppercase tracking-wider font-semibold block">{t('statSources')}</span>
           <div className="text-3xl font-black text-purple-400 font-mono">{stats?.summary?.totalSources || 3}</div>
           <div className="text-[11px] text-purple-300">Twitter API Harvester Posts</div>
         </div>
@@ -74,7 +77,7 @@ export default function AnalyticsDashboard({ stats, incidents }) {
         {/* Taxon Composition */}
         <div className="glass-panel p-6 rounded-3xl border border-slate-800 space-y-4">
           <h3 className="text-lg font-bold text-white flex items-center justify-between border-b border-slate-800 pb-3">
-            <span>Taxon Breakdown</span>
+            <span>{t('chartTaxonBreakdown')}</span>
             <PieChart className="w-5 h-5 text-teal-400" />
           </h3>
 
@@ -99,7 +102,7 @@ export default function AnalyticsDashboard({ stats, incidents }) {
         {/* District Hotspots */}
         <div className="glass-panel p-6 rounded-3xl border border-slate-800 space-y-4">
           <h3 className="text-lg font-bold text-white flex items-center justify-between border-b border-slate-800 pb-3">
-            <span>District Hotspots (Sri Lanka Coast)</span>
+            <span>{t('chartDistrictBreakdown')}</span>
             <MapPin className="w-5 h-5 text-amber-400" />
           </h3>
 
@@ -124,3 +127,4 @@ export default function AnalyticsDashboard({ stats, incidents }) {
     </div>
   );
 }
+

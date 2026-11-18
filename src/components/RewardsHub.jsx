@@ -1,7 +1,10 @@
 import React from 'react';
 import { Award, Shield, Star, CheckCircle, Trophy, UserCheck, Flame } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function RewardsHub({ rewards, stats }) {
+  const { t } = useLanguage();
+
   const pointsList = [
     { action: 'Submit report with GPS', points: '5 pts' },
     { action: 'Submit report with clear photo', points: '10 pts' },
@@ -30,21 +33,21 @@ export default function RewardsHub({ rewards, stats }) {
         <div className="space-y-1">
           <div className="flex items-center space-x-2 text-coral text-xs font-bold uppercase tracking-wider">
             <Award className="w-4 h-4" />
-            <span>National Citizen Science Reward & Gamification System</span>
+            <span>{t('rewardsTitle')}</span>
           </div>
-          <h2 className="text-2xl font-extrabold text-white">Citizen Science Contribution & Badges</h2>
-          <p className="text-xs text-slate-300">Encourages accurate, safe, and useful incident reporting for Sri Lanka's marine conservation.</p>
+          <h2 className="text-2xl font-extrabold text-white">{t('rewardsTitle')}</h2>
+          <p className="text-xs text-slate-300">{t('rewardsSub')}</p>
         </div>
 
         <div className="bg-slate-900 px-5 py-3 rounded-2xl border border-slate-800 text-center">
-          <span className="text-slate-400 text-xs block">Your User Level:</span>
-          <strong className="text-cyan-400 font-extrabold text-base">Level 2: Coastal Reporter</strong>
+          <span className="text-slate-400 text-xs block">{t('userPoints')}:</span>
+          <strong className="text-cyan-400 font-extrabold text-base">{stats?.summary?.totalPointsAwarded || 25} XP (Level 2)</strong>
         </div>
       </div>
 
-      {/* Badges Grid (Page 10 of PDF) */}
+      {/* Badges Grid */}
       <div className="space-y-4">
-        <h3 className="text-lg font-bold text-white">Earned Conservation Badges</h3>
+        <h3 className="text-lg font-bold text-white">{t('badgesEarned')}</h3>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
           {badges.map((b, idx) => (
             <div 
@@ -68,7 +71,7 @@ export default function RewardsHub({ rewards, stats }) {
         </div>
       </div>
 
-      {/* Points System Structure Table (Page 10 of PDF) */}
+      {/* Points System Structure Table */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="glass-panel p-6 rounded-3xl border border-slate-800 space-y-4">
           <h3 className="text-base font-bold text-white flex items-center gap-2">
@@ -119,3 +122,4 @@ export default function RewardsHub({ rewards, stats }) {
     </div>
   );
 }
+

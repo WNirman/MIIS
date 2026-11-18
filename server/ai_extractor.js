@@ -8,16 +8,17 @@ export async function processWithGemini(text, mediaMetadata = null) {
     try {
       const prompt = `
 You are the AI Triage Engine for the Marine Incident Intelligence System (MIIS) in Sri Lanka.
-Analyze the following input report or social media post and extract structured incident details.
+Analyze the following input report or social media post (which may be written in English, Sinhala, Tamil, Singlish, or Tanglish) and extract structured incident details.
 
 Input Text: "${text}"
 
 Respond ONLY with a valid JSON object with the following fields:
 {
   "is_relevant": true or false,
+  "detected_language": "en" | "si" | "ta" | "other",
   "event_type": "Dead animal" | "Live stranded animal" | "Injured animal" | "Entangled animal" | "Washed-ashore animal" | "Fish kill" | "Coral bleaching" | "Oil pollution" | "Chemical pollution" | "Plastic/nurdle pollution" | "Ghost net" | "Unusual coastal event",
   "taxon_group": "Sea turtle" | "Dolphin" | "Whale" | "Dugong" | "Shark" | "Ray" | "Fish" | "Seabird" | "Coral/reef" | "Mixed animals" | "Unknown" | "Not animal-related",
-  "species_common": "Common name or Unknown",
+  "species_common": "Common name in English (e.g., Olive Ridley Turtle, Blue Whale) or Unknown",
   "species_scientific": "Scientific binomial name or Unknown",
   "condition_status": "Alive" | "Dead" | "Injured" | "Entangled" | "Decomposed" | "Skeleton/remains" | "Floating" | "Washed ashore",
   "number_dead": integer,
@@ -35,7 +36,7 @@ Respond ONLY with a valid JSON object with the following fields:
   "cause_category": "Fisheries Interaction" | "Chemical / Oil Spill" | "Stranding" | "Plastic Pollution" | "Boat Strike" | "Natural / Disease" | "Unknown",
   "urgency_level": "critical" | "high" | "medium" | "low",
   "confidence_score": integer between 0 and 100,
-  "evidence_sentence": "Key quote supporting extraction"
+  "evidence_sentence": "Key quote supporting extraction in the original language"
 }
 `;
 
@@ -60,7 +61,7 @@ Respond ONLY with a valid JSON object with the following fields:
     }
   }
 
-  // Fallback Rule Engine
+  // Fallback Rule Engine with Tri-Lingual Support
   return fallbackTriageRules(text);
 }
 
@@ -80,74 +81,83 @@ function fallbackTriageRules(text) {
   let causeCategory = "Unknown";
   let suspectedCause = "Under Investigation";
 
-  if (lower.includes("turtle")) {
+  // Multi-lingual Taxa Matching (English, Sinhala: කැස්බෑවා, Tamil: ஆமை)
+  if (lower.includes("turtle") || text.includes("කැස්බෑ") || text.includes("ආமை")) {
     taxonGroup = "Sea turtle";
-    speciesCommon = lower.includes("olive") ? "Olive Ridley Sea Turtle" : "Green Sea Turtle";
-    if (lower.includes("entangled") || lower.includes("net")) {
+    speciesCommon = (lower.includes("olive") || text.includes("බොත්තු") || text.includes("சிற்றாமை")) ? "Olive Ridley Sea Turtle" : "Green Sea Turtle";
+    if (lower.includes("entangled") || lower.includes("net") || text.includes("දැල") || text.includes("வலை")) {
       eventType = "Entangled animal";
       conditionStatus = "Entangled";
       causeCategory = "Fisheries Interaction";
       suspectedCause = "Ghost net entanglement";
     }
-  } else if (lower.includes("whale")) {
+  } else if (lower.includes("whale") || text.includes("තල්මස") || text.includes("திமிங்கிலம்")) {
     taxonGroup = "Whale";
-    speciesCommon = lower.includes("humpback") ? "Humpback Whale" : "Blue Whale";
-    if (lower.includes("stranded") || lower.includes("live")) {
+    speciesCommon = (lower.includes("humpback") || text.includes("හම්ප්බැක්")) ? "Humpback Whale" : "Blue Whale";
+    if (lower.includes("stranded") || lower.includes("live") || text.includes("පණපිටින්") || text.includes("உயிருடன்")) {
       eventType = "Live stranded animal";
       conditionStatus = "Alive";
       urgency = "critical";
       causeCategory = "Stranding";
     }
-  } else if (lower.includes("oil") || lower.includes("sludge") || lower.includes("spill")) {
+  } else if (lower.includes("dolphin") || text.includes("ඩොල්ෆින්") || text.includes("டால்பின்")) {
+    taxonGroup = "Dolphin";
+    speciesCommon = "Spinner Dolphin";
+  } else if (lower.includes("oil") || lower.includes("sludge") || lower.includes("spill") || text.includes("තෙල්") || text.includes("எண்ணெய்")) {
     taxonGroup = "Not animal-related";
     eventType = "Oil pollution";
     conditionStatus = "N/A";
     urgency = "high";
     causeCategory = "Chemical / Oil Spill";
     suspectedCause = "Maritime discharge";
-  } else if (lower.includes("fish") || lower.includes("sardine")) {
+  } else if (lower.includes("fish") || lower.includes("sardine") || text.includes("මාලු") || text.includes("මසුන්") || text.includes("மீன்")) {
     taxonGroup = "Fish";
     eventType = "Fish kill";
     conditionStatus = "Dead";
     causeCategory = "Chemical / Oil Spill";
     suspectedCause = "Hypoxia / Chemical Runoff";
-  } else if (lower.includes("dugong")) {
+  } else if (lower.includes("dugong") || text.includes("මුහුදු ඌරා") || text.includes("ඩුගොන්ග්") || text.includes("கடல் பசு")) {
     taxonGroup = "Dugong";
     speciesCommon = "Dugong";
     eventType = "Dead animal";
     urgency = "high";
   }
 
-  // Location Geocoding
-  if (lower.includes("trincomalee") || lower.includes("pigeon island")) {
+  // Multi-lingual Coastal Locations (Trincomalee / ත්‍රිකුණාමලය / திருகோணமலை, Galle / ගාල්ල / காலி, etc.)
+  if (lower.includes("trincomalee") || text.includes("ත්‍රිකුණාමල") || text.includes("திருகோணமலை") || lower.includes("pigeon island")) {
     nearestTown = "Trincomalee";
     district = "Trincomalee";
     province = "Eastern Province";
     lat = 8.5874; lon = 81.2152;
     if (lower.includes("8.718")) { lat = 8.718; lon = 81.205; }
-  } else if (lower.includes("galle")) {
+  } else if (lower.includes("galle") || text.includes("ගාල්ල") || text.includes("காலி")) {
     nearestTown = "Galle Fort";
     district = "Galle";
     province = "Southern Province";
     lat = 6.0535; lon = 80.2210;
-  } else if (lower.includes("mount lavinia")) {
+  } else if (lower.includes("mount lavinia") || text.includes("ගල්කිස්ස")) {
     nearestTown = "Mount Lavinia";
     district = "Colombo";
     province = "Western Province";
     lat = 6.838; lon = 79.863;
-  } else if (lower.includes("negombo")) {
+  } else if (lower.includes("negombo") || text.includes("මීගමුව") || text.includes("நீர்கொழும்பு")) {
     nearestTown = "Negombo";
     district = "Gampaha";
     province = "Western Province";
     lat = 7.2008; lon = 79.8737;
-  } else if (lower.includes("kalpitiya") || lower.includes("mannar")) {
+  } else if (lower.includes("kalpitiya") || text.includes("කල්පිටිය") || text.includes("கற்பிட்டி") || lower.includes("mannar") || text.includes("මන්නාරම") || text.includes("மன்னார்")) {
     nearestTown = "Kalpitiya";
     district = "Puttalam";
     province = "North Western Province";
     lat = 8.2312; lon = 79.7424;
+  } else if (lower.includes("matara") || text.includes("මාතර") || text.includes("மாத்தறை") || lower.includes("mirissa") || text.includes("මිරිස්ස")) {
+    nearestTown = "Mirissa";
+    district = "Matara";
+    province = "Southern Province";
+    lat = 5.9483; lon = 80.4552;
   }
 
-  if (lower.includes("critical") || lower.includes("live") || lower.includes("rescue")) {
+  if (lower.includes("critical") || lower.includes("live") || lower.includes("rescue") || text.includes("හදිසි") || text.includes("අවදානම්") || text.includes("அவசரம்")) {
     urgency = "critical";
   }
 
@@ -176,3 +186,4 @@ function fallbackTriageRules(text) {
     evidence_sentence: text.length > 110 ? text.substring(0, 110) + "..." : text
   };
 }
+

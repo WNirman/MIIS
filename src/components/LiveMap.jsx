@@ -2,8 +2,20 @@ import React, { useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, Circle } from 'react-leaflet';
 import L from 'leaflet';
 import { Filter, EyeOff, ShieldCheck, AlertTriangle, Info, MapPin } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 // Custom Map Pins for Leaflet
+const getTaxonEmoji = (taxon) => {
+  const t = (taxon || '').toLowerCase();
+  if (t.includes('turtle')) return '🐢';
+  if (t.includes('whale')) return '🐋';
+  if (t.includes('dolphin')) return '🐬';
+  if (t.includes('dugong')) return '🦭';
+  if (t.includes('shark') || t.includes('ray') || t.includes('manta')) return '🦈';
+  if (t.includes('fish') || t.includes('coral')) return '🐠';
+  return '📍';
+};
+
 const createCustomIcon = (urgency, taxon) => {
   let color = '#00B4D8'; // Cyan
   if (urgency === 'critical') color = '#EF4444'; // Red
@@ -25,9 +37,9 @@ const createCustomIcon = (urgency, taxon) => {
         justify-content: center;
         color: #0f172a;
         font-weight: bold;
-        font-size: 12px;
+        font-size: 13px;
       ">
-        ${taxon === 'Sea turtle' ? '🐢' : taxon === 'Whale' ? '🐋' : taxon === 'Dolphin' ? '🐬' : '📍'}
+        ${getTaxonEmoji(taxon)}
       </div>
     `,
     iconSize: [28, 28],
@@ -36,13 +48,18 @@ const createCustomIcon = (urgency, taxon) => {
 };
 
 export default function LiveMap({ incidents }) {
+  const { t } = useLanguage();
   const [taxonFilter, setTaxonFilter] = useState('All');
   const [urgencyFilter, setUrgencyFilter] = useState('All');
   const [blurSensitive, setBlurSensitive] = useState(true);
   const [selectedIncident, setSelectedIncident] = useState(null);
 
   const filteredIncidents = incidents.filter(inc => {
-    if (taxonFilter !== 'All' && inc.taxon_group !== taxonFilter) return false;
+    if (taxonFilter !== 'All') {
+      const g = (inc.taxon_group || '').toLowerCase();
+      const f = taxonFilter.toLowerCase();
+      if (!g.includes(f) && !f.includes(g)) return false;
+    }
     if (urgencyFilter !== 'All' && inc.urgency_level !== urgencyFilter) return false;
     return true;
   });
@@ -53,7 +70,7 @@ export default function LiveMap({ incidents }) {
       <div className="glass-panel p-4 rounded-2xl flex flex-wrap items-center justify-between gap-4 border border-cyan-500/20">
         <div className="flex items-center space-x-3">
           <MapPin className="w-5 h-5 text-cyan-400" />
-          <h2 className="text-lg font-bold text-white">Public Marine Incident Map</h2>
+          <h2 className="text-lg font-bold text-white">{t('mapTitle')}</h2>
           <span className="bg-cyan-500/20 text-cyan-300 text-xs px-2.5 py-0.5 rounded-full border border-cyan-500/30">
             {filteredIncidents.length} Records Georeferenced
           </span>
@@ -68,12 +85,11 @@ export default function LiveMap({ incidents }) {
               onChange={(e) => setTaxonFilter(e.target.value)}
               className="bg-transparent text-white focus:outline-none"
             >
-              <option value="All" className="bg-slate-900">All Taxons</option>
-              <option value="Sea turtle" className="bg-slate-900">Sea Turtle</option>
-              <option value="Whale" className="bg-slate-900">Whale</option>
-              <option value="Dolphin" className="bg-slate-900">Dolphin</option>
-              <option value="Fish" className="bg-slate-900">Fish / Fish Kill</option>
-              <option value="Dugong" className="bg-slate-900">Dugong</option>
+              <option value="All" className="bg-slate-900">{t('filterAll')} Taxa</option>
+              <option value="Turtle" className="bg-slate-900">🐢 {t('taxaTurtle')}</option>
+              <option value="Mammal" className="bg-slate-900">🐬 {t('taxaDolphin')} / Dugong</option>
+              <option value="Shark" className="bg-slate-900">🦈 {t('taxaShark')}</option>
+              <option value="Fish" className="bg-slate-900">🐠 {t('taxaFish')}</option>
             </select>
           </div>
 
@@ -84,14 +100,14 @@ export default function LiveMap({ incidents }) {
               onChange={(e) => setUrgencyFilter(e.target.value)}
               className="bg-transparent text-white focus:outline-none"
             >
-              <option value="All" className="bg-slate-900">All Urgency Levels</option>
-              <option value="critical" className="bg-slate-900">Critical Response</option>
-              <option value="high" className="bg-slate-900">High Urgency</option>
-              <option value="medium" className="bg-slate-900">Medium</option>
+              <option value="All" className="bg-slate-900">{t('filterUrgency')}: {t('filterAll')}</option>
+              <option value="critical" className="bg-slate-900">{t('urgencyCritical')}</option>
+              <option value="high" className="bg-slate-900">{t('urgencyHigh')}</option>
+              <option value="medium" className="bg-slate-900">{t('urgencyMedium')}</option>
             </select>
           </div>
 
-          {/* Sensitive Location Blurring Toggle (Page 12 of PDF) */}
+          {/* Sensitive Location Blurring Toggle */}
           <button
             onClick={() => setBlurSensitive(!blurSensitive)}
             className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-xl border transition-all ${
@@ -121,14 +137,12 @@ export default function LiveMap({ incidents }) {
             />
 
             {filteredIncidents.map((inc) => {
-              // Apply coordinate blurring offset if sensitive location is flagged
               const isSensitive = inc.sensitive_location && blurSensitive;
               const displayLat = isSensitive ? inc.latitude + 0.02 : inc.latitude;
               const displayLon = isSensitive ? inc.longitude + 0.02 : inc.longitude;
 
               return (
                 <React.Fragment key={inc.incident_id}>
-                  {/* Blurring Radius Circle for Sensitive Species (Nesting beaches, dugongs) */}
                   {isSensitive && (
                     <Circle
                       center={[displayLat, displayLon]}
@@ -150,7 +164,7 @@ export default function LiveMap({ incidents }) {
                         <div className="font-extrabold text-sm">{inc.taxon_group} — {inc.event_type}</div>
                         <div className="text-xs text-slate-600">📍 {inc.nearest_town}, {inc.district}</div>
                         <div className="text-[11px] bg-slate-100 p-1 rounded font-mono">
-                          Status: {inc.validation_status}
+                          {t('popupStatus')} {inc.validation_status}
                         </div>
                       </div>
                     </Popup>
@@ -165,7 +179,7 @@ export default function LiveMap({ incidents }) {
         <div className="glass-panel p-6 rounded-3xl border border-slate-800 space-y-6 flex flex-col justify-between">
           <div>
             <h3 className="text-lg font-bold text-white border-b border-slate-800 pb-3 flex items-center justify-between">
-              <span>Incident Details</span>
+              <span>{t('mapLegend')} & Info</span>
               <ShieldCheck className="w-5 h-5 text-emerald-400" />
             </h3>
 
@@ -187,19 +201,19 @@ export default function LiveMap({ incidents }) {
 
                 <div className="bg-slate-900/80 p-3 rounded-xl space-y-2 border border-slate-800">
                   <div className="flex justify-between">
-                    <span className="text-slate-400">Event Type:</span>
+                    <span className="text-slate-400">{t('fieldEventType')}:</span>
                     <span className="text-slate-200 font-semibold">{selectedIncident.event_type}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-slate-400">Condition:</span>
+                    <span className="text-slate-400">{t('popupCondition')}</span>
                     <span className="text-slate-200 font-semibold">{selectedIncident.condition_status}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-slate-400">Location:</span>
+                    <span className="text-slate-400">{t('fieldLocationName')}:</span>
                     <span className="text-cyan-300 font-semibold">{selectedIncident.location_name || selectedIncident.nearest_town}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-slate-400">District:</span>
+                    <span className="text-slate-400">{t('popupDistrict')}</span>
                     <span className="text-slate-200 font-semibold">{selectedIncident.district}</span>
                   </div>
                   <div className="flex justify-between">
@@ -236,3 +250,4 @@ export default function LiveMap({ incidents }) {
     </div>
   );
 }
+

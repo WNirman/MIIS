@@ -1,0 +1,25 @@
+scientific_name_std,common_name,taxon_group,order_name,family,identification_level,iucn_global_status,iucn_assessment_note,raw_aliases
+Lepidochelys olivacea,Olive ridley turtle,Sea turtle,Testudines,Cheloniidae,species,VU,IUCN Global Vulnerable (2025/2026),Lepidochelys olivacea
+Chelonia mydas,Green turtle,Sea turtle,Testudines,Cheloniidae,species,LC,Downlisted from EN to LC globally in Oct 2025 (Sri Lanka National Red List: EN),Chelonia mydas
+Eretmochelys imbricata,Hawksbill turtle,Sea turtle,Testudines,Cheloniidae,species,CR,IUCN Global Critically Endangered,Eretmochelys imbricata
+Caretta caretta,Loggerhead turtle,Sea turtle,Testudines,Cheloniidae,species,VU,IUCN Global Vulnerable (North Indian Ocean RMU: CR),Caretta caretta
+Dermochelys coriacea,Leatherback turtle,Sea turtle,Testudines,Dermochelyidae,species,VU,IUCN Global Vulnerable,Dermochelys coriacea
+Stenella longirostris,Spinner dolphin,Cetacean,Artiodactyla,Delphinidae,species,LC,IUCN Global Least Concern,Stenella longirostris
+Stenella coeruleoalba,Striped dolphin,Cetacean,Artiodactyla,Delphinidae,species,LC,IUCN Global Least Concern,Stenella coeruleoalba
+Globicephala macrorhynchus,Short-finned pilot whale,Cetacean,Artiodactyla,Delphinidae,species,LC,IUCN Global Least Concern,Globicephala macrorhynchus
+Sousa sp.,Humpback dolphin (genus only),Cetacean,Artiodactyla,Delphinidae,genus,EN*,Genus-level record; regional species Sousa plumbea is IUCN EN,Sousa spp|Sousa sp|Sousa sp.
+Kogia sima,Dwarf sperm whale,Cetacean,Artiodactyla,Kogiidae,species,LC,IUCN Global Least Concern,Kogia sima
+Delphinus delphis,Common dolphin,Cetacean,Artiodactyla,Delphinidae,species,LC,IUCN Global Least Concern,Delphinus delphis|delphinus delphis
+Balaenoptera musculus,Blue whale,Cetacean,Artiodactyla,Balaenopteridae,species,EN,IUCN Global Endangered (Northern Indian Ocean resident population),Balaenoptera musculus
+Balaenoptera sp.,Rorqual (Bryde's or blue whale; unresolved),Cetacean,Artiodactyla,Balaenopteridae,genus,,Unresolved candidate pair B. edeni / B. musculus in ministry log,Balaenoptera edeni/Balaenoptera musculus
+Feresa attenuata,Pygmy killer whale,Cetacean,Artiodactyla,Delphinidae,species,LC,IUCN Global Least Concern,Feresa attenuata
+Grampus griseus,Risso's dolphin,Cetacean,Artiodactyla,Delphinidae,species,LC,IUCN Global Least Concern,Grampus griseus
+Lagenodelphis hosei,Fraser's dolphin,Cetacean,Artiodactyla,Delphinidae,species,LC,IUCN Global Least Concern,Lagenodelphis hosei
+Neophocaena phocaenoides,Indo-Pacific finless porpoise,Cetacean,Artiodactyla,Phocoenidae,species,VU,IUCN Global Vulnerable; raw typo Neophocena corrected,Neophocaena phocaenoides|Neophocena phocaenoides
+Pseudorca crassidens,False killer whale,Cetacean,Artiodactyla,Delphinidae,species,NT,IUCN Global Near Threatened,Pseudorca crassidens
+Tursiops truncatus,Common bottlenose dolphin,Cetacean,Artiodactyla,Delphinidae,species,LC,IUCN Global Least Concern,Tursiops truncatus
+Dugong dugon,Dugong,Sirenian,Sirenia,Dugongidae,species,VU,IUCN Global Vulnerable (Sri Lanka / Gulf of Mannar population locally CR),Dugong|Dugong dugon
+Cheloniidae/Dermochelyidae indet.,Sea turtle (species not identified),Sea turtle,Testudines,Cheloniidae/Dermochelyidae,order,,Taxon recorded as Sea turtle without species ID,
+Delphinidae indet.,Dolphin (species not identified),Cetacean,Artiodactyla,Delphinidae,family,,Taxon recorded as Dolphin without species ID,
+Cetacea indet.,Whale (species not identified),Cetacean,Artiodactyla,Cetacea,order,,Taxon recorded as Whale or Whale fetus without species ID,
+Unidentified marine fauna,Unidentified marine animal,Unknown,,,unidentified,,Both common category and scientific name blank in raw sheet,

@@ -1,0 +1,26 @@
+province,district,locality_std,n,turtles,cetaceans,first,last,lat,lon
+Western,Colombo,Galle Face,23,20,0,2021-06-10,2025-08-30,6.927,79.845
+Western,Gampaha,Kepungoda (Pamunugama),19,18,1,2021-06-21,2022-11-03,7.12,79.836
+Western,Colombo,Mount Lavinia,17,16,1,2021-06-05,2025-08-24,6.839,79.863
+Western,Colombo,Wellawatte,17,16,0,2021-06-02,2025-07-12,6.874,79.857
+North Western,Puttalam,Suduwella (Chilaw),12,12,0,2021-06-14,2021-08-08,7.59,79.792
+Western,Gampaha,Pamunugama,11,11,0,2021-07-06,2021-11-22,7.092,79.841
+Western,Gampaha,Poruthota (Negombo),11,6,4,2021-06-11,2022-10-05,7.232,79.836
+Southern,Galle,Induruwa,10,8,2,2021-06-04,2021-11-27,6.38,80.015
+North Western,Puttalam,Kasakele (Kandakuliya),10,10,0,2021-06-03,2021-07-25,8.19,79.705
+Western,Gampaha,Dungalpitiya,10,8,2,2021-07-06,2021-10-13,7.163,79.827
+Western,Kalutara,Moragalla (Beruwala),9,9,0,2021-06-05,2021-07-04,6.452,79.988
+Southern,Galle,Kosgoda,9,9,0,2021-06-05,2021-07-12,6.333,80.027
+Northern,Mannar,Nadukuda (Mannar Island),9,7,2,2021-06-17,2021-08-01,9.04,79.79
+North Western,Puttalam,Ilanthadiya (Kalpitiya),9,8,1,2021-06-09,2021-07-14,8.105,79.71
+Western,Kalutara,Payagala,8,8,0,2021-06-06,2021-07-24,6.532,79.976
+North Western,Puttalam,Sinnapadu (Mundalama),7,7,0,2021-06-07,2021-06-29,7.81,79.785
+Western,Kalutara,Panadura,7,7,0,2021-06-14,2022-06-12,6.712,79.902
+Western,Gampaha,Uswetakeiyawa,7,7,0,2021-07-21,2021-09-30,7.042,79.853
+North Western,Puttalam,Wennappuwa coast,6,6,0,2021-06-25,2021-07-02,7.35,79.83
+Western,Kalutara,Calido Beach (Kalutara),6,4,2,2021-06-14,2021-08-26,6.578,79.957
+Western,Gampaha,Thalahena,6,6,0,2021-06-16,2022-10-10,7.18,79.828
+Northern,Mannar,Vankalai,6,6,0,2021-07-14,2021-07-14,8.938,79.95
+North Western,Puttalam,Andimunai (Mundalama),6,4,2,2021-06-14,2021-09-12,7.79,79.785
+North Western,Puttalam,Alankuda,6,6,0,2021-07-03,2021-09-27,8.07,79.712
+North Western,Puttalam,Kudawa (Kalpitiya),5,0,5,2022-11-17,2023-02-12,8.28,79.73

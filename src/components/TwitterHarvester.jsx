@@ -15,7 +15,7 @@ export default function SocialMediaHarvester({ sources, onHarvestCompleted }) {
     'dolphin stranded Colombo',
     'oil spill Galle beach',
     'fish kill Negombo lagoon',
-    'nurdle pollution Sri Lanka',
+    'marine pollution Sri Lanka',
     'ghost net coral reef'
   ];
 

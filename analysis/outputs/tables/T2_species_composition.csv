@@ -1,0 +1,25 @@
+taxon_group,scientific_name,common_name,iucn_global_status,n,pct_of_all_records
+Sea turtle,Lepidochelys olivacea,Olive ridley turtle,VU,346,67.05
+Sea turtle,Chelonia mydas,Green turtle,LC,41,7.95
+Sea turtle,Cheloniidae/Dermochelyidae indet.,Sea turtle (species not identified),,30,5.81
+Sea turtle,Eretmochelys imbricata,Hawksbill turtle,CR,16,3.1
+Cetacean,Delphinidae indet.,Dolphin (species not identified),,15,2.91
+Cetacean,Stenella longirostris,Spinner dolphin,LC,15,2.91
+Cetacean,Stenella coeruleoalba,Striped dolphin,LC,12,2.33
+Cetacean,Cetacea indet.,Whale (species not identified),,8,1.55
+Unknown,Unidentified marine fauna,Unidentified marine animal,,7,1.36
+Cetacean,Globicephala macrorhynchus,Short-finned pilot whale,LC,4,0.78
+Cetacean,Sousa sp.,Humpback dolphin (genus only),EN*,3,0.58
+Cetacean,Kogia sima,Dwarf sperm whale,LC,3,0.58
+Sea turtle,Caretta caretta,Loggerhead turtle,VU,3,0.58
+Cetacean,Delphinus delphis,Common dolphin,LC,2,0.39
+Sea turtle,Dermochelys coriacea,Leatherback turtle,VU,2,0.39
+Cetacean,Balaenoptera musculus,Blue whale,EN,1,0.19
+Cetacean,Grampus griseus,Risso's dolphin,LC,1,0.19
+Cetacean,Feresa attenuata,Pygmy killer whale,LC,1,0.19
+Cetacean,Balaenoptera sp.,Rorqual (Bryde's or blue whale; unresolved),,1,0.19
+Cetacean,Pseudorca crassidens,False killer whale,NT,1,0.19
+Cetacean,Tursiops truncatus,Common bottlenose dolphin,LC,1,0.19
+Cetacean,Lagenodelphis hosei,Fraser's dolphin,LC,1,0.19
+Cetacean,Neophocaena phocaenoides,Indo-Pacific finless porpoise,VU,1,0.19
+Sirenian,Dugong dugon,Dugong,VU,1,0.19

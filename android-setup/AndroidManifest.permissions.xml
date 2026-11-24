@@ -1,0 +1,26 @@
+<!--
+  Required AndroidManifest.xml permissions for MIIS Sea Reporter (Sri Lanka Fisher APK)
+  Merge these inside android/app/src/main/AndroidManifest.xml after `npx cap add android`.
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Passive Hardware Satellite GNSS (GPS / GLONASS / Galileo — works with zero cellular signal) -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-feature android:name="android.hardware.location.gps" android:required="true" />
+
+    <!-- Evidence Photography & Offline Local Cache -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+
+    <!-- Network Quality Inspection (distinguish 2G sea link vs harbour 4G/Wi-Fi) -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!-- Zero-Data 2G Offshore SMS Fallback Intent -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.SENDTO" />
+            <data android:scheme="sms" />
+        </intent>
+    </queries>
+</manifest>

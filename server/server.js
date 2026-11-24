@@ -12,10 +12,31 @@ import {
   getAllCitizenReports,
   insertCitizenReport,
   getAllRewards,
-  insertReward
+  insertReward,
+  getBeaconByClientUuid,
+  getAllMaritimeBeacons,
+  insertMaritimeBeacon,
+  attachMediaToBeacon,
+  getUserByEmail,
+  getUserById,
+  createUser,
+  logSecurityAudit,
+  getRecentAuditLogs,
+  getBeaconsByReporter
 } from './db.js';
+import fs from 'fs';
 import { processWithGemini } from './ai_extractor.js';
 import { calculateTurtleConfidenceScore, SRI_LANKA_SEA_TURTLE_SPECIES } from './species_data.js';
+import smsGatewayRouter from './sms_gateway.js';
+import {
+  attachUser,
+  requireAuth,
+  requireRole,
+  hashPassword,
+  verifyPassword,
+  signToken,
+  redactIncidentForRole
+} from './auth.js';
 
 import { execFile } from 'child_process';
 import path from 'path';
@@ -30,10 +51,153 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(cors());
-app.use(express.json());
+app.use(express.json({ limit: '6mb' }));
+app.use(express.urlencoded({ extended: false }));
+app.use(attachUser);
+
+// ============================================================================
+// PORTAL AUTHENTICATION & ROLE-BASED ACCESS CONTROL (RBAC) ENDPOINTS
+// Public reporting NEVER requires login; sensitive data & validation DO!
+// ============================================================================
+app.post('/api/auth/login', (req, res) => {
+  try {
+    const { email, password } = req.body || {};
+    const user = getUserByEmail(email);
+    if (!user || !verifyPassword(password, user.password_hash)) {
+      return res.status(401).json({ success: false, error: 'Invalid portal email or password.' });
+    }
+    const token = signToken(user);
+    logSecurityAudit({
+      user,
+      action: 'PORTAL_LOGIN',
+      resource: '/api/auth/login',
+      details: `Authenticated ${user.role} portal session`,
+      ip: req.ip,
+    });
+    const { password_hash, ...safeUser } = user;
+    res.json({ success: true, token, user: safeUser });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+app.post('/api/auth/register', (req, res) => {
+  try {
+    const { email, password, full_name, organization = '', district = 'Colombo' } = req.body || {};
+    if (!email || !password || !full_name || String(password).length < 6) {
+      return res.status(400).json({ success: false, error: 'Full name, email, and a password of at least 6 characters are required.' });
+    }
+    if (getUserByEmail(email)) {
+      return res.status(409).json({ success: false, error: 'An account with this email already exists.' });
+    }
+    // Self-registration is strictly scoped to 'reporter' role (validator/admin elevation requires institutional approval)
+    const created = createUser({
+      user_id: `USR-REP-${Date.now()}`,
+      email,
+      full_name: String(full_name).trim(),
+      organization: String(organization || 'Coastal Citizen Observer').trim(),
+      role: 'reporter',
+      district: String(district || 'Colombo').trim(),
+      password_hash: hashPassword(password),
+      verified_badge: 0,
+    });
+    const token = signToken(created);
+    logSecurityAudit({
+      user: created,
+      action: 'REPORTER_REGISTER',
+      resource: '/api/auth/register',
+      details: `Registered coastal reporter (${created.district})`,
+      ip: req.ip,
+    });
+    res.json({ success: true, token, user: created });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+app.get('/api/auth/me', requireAuth, (req, res) => {
+  const fresh = getUserById(req.user.sub);
+  res.json({ success: true, user: fresh || req.user });
+});
+
+app.get('/api/portal/my-reports', requireAuth, (req, res) => {
+  try {
+    const beacons = getBeaconsByReporter(req.user.sub);
+    res.json({ success: true, count: beacons.length, data: beacons });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+app.get('/api/audit-logs', requireRole('validator', 'admin'), (req, res) => {
+  try {
+    const logs = getRecentAuditLogs(40);
+    res.json({ success: true, count: logs.length, data: logs });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// Protected full unredacted national dataset export (Validators & Admins only!)
+app.get('/api/ministry-dataset', requireRole('validator', 'admin'), (req, res) => {
+  try {
+    const filePath = path.join(__dirname, '..', 'src', 'data', 'ministry_mortality_clean.json');
+    const dataset = fs.existsSync(filePath) ? JSON.parse(fs.readFileSync(filePath, 'utf8')) : { records: [] };
+    logSecurityAudit({
+      user: req.user,
+      action: 'SENSITIVE_DATASET_ACCESS',
+      resource: '/api/ministry-dataset',
+      details: `Accessed ${dataset.records?.length || 0} unredacted national records`,
+      ip: req.ip,
+    });
+    res.json({ success: true, access_tier: req.user.role, ...dataset });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// Mount multi-channel 2G GSM SMS gateway (Direct, Android SMS Forwarder, Twilio/Carrier, SIM800L)
+app.use(smsGatewayRouter);
 
 // Initialize SQLite database
 initDatabase();
+
+// Server-side Sri Lanka Maritime Geofence & District-Province Integrity Map
+const SL_DISTRICT_TO_PROVINCE = {
+  Colombo: 'Western',
+  Gampaha: 'Western',
+  Kalutara: 'Western',
+  Puttalam: 'North Western',
+  Mannar: 'Northern',
+  Kilinochchi: 'Northern',
+  Jaffna: 'Northern',
+  Mullaitivu: 'Northern',
+  Trincomalee: 'Eastern',
+  Batticaloa: 'Eastern',
+  Ampara: 'Eastern',
+  Hambantota: 'Southern',
+  Matara: 'Southern',
+  Galle: 'Southern',
+};
+
+function haversineKmServer(lat1, lon1, lat2, lon2) {
+  const R = 6371.0;
+  const toRad = (d) => (d * Math.PI) / 180;
+  const dLat = toRad(lat2 - lat1);
+  const dLon = toRad(lon2 - lon1);
+  const a = Math.sin(dLat / 2) ** 2 + Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLon / 2) ** 2;
+  return 2 * R * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+
+function validateMaritimeLatLon(lat, lon) {
+  const nLat = Number(lat);
+  const nLon = Number(lon);
+  if (!Number.isFinite(nLat) || !Number.isFinite(nLon)) return { valid: false, reason: 'Non-numeric coordinates' };
+  if (nLat < 4.5 || nLat > 10.6 || nLon < 78.2 || nLon > 83.4) {
+    return { valid: false, reason: 'Coordinates outside Sri Lanka Maritime EEZ bounding box (4.5-10.6N, 78.2-83.4E)' };
+  }
+  return { valid: true, latitude: Number(nLat.toFixed(6)), longitude: Number(nLon.toFixed(6)) };
+}
 
 // Turtle Species AI & Computer Vision Classification Endpoint
 app.post('/api/ai/classify-turtle', (req, res) => {
@@ -95,26 +259,48 @@ app.post('/api/ai/turtle-verify', async (req, res) => {
   }
 });
 
-// Clear database endpoint
-app.post('/api/clear', (req, res) => {
+// Clear database endpoint (Admin only)
+app.post('/api/clear', requireRole('admin'), (req, res) => {
   try {
     clearDatabase();
+    logSecurityAudit({ user: req.user, action: 'DB_CLEAR', resource: '/api/clear', ip: req.ip });
     res.json({ success: true, message: 'Database cleared completely.' });
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });
   }
 });
 
-// 1. Get all incidents with optional filters
+// 1. Get incidents — STRICT CONFIDENTIALITY: Validator / Admin access ONLY!
+// Public visitors and reporters NEVER receive other observers' records or confidential data.
 app.get('/api/incidents', (req, res) => {
   try {
+    const isAuthorizedValidator = req.user && (req.user.role === 'validator' || req.user.role === 'admin');
+    if (!isAuthorizedValidator) {
+      return res.json({
+        success: true,
+        access_tier: req.user?.role || 'public',
+        protection_active: true,
+        confidential_locked: true,
+        count: 0,
+        data: [],
+        message: 'Incident records are confidential and restricted to verified Validators.',
+      });
+    }
     const filters = {
       taxon: req.query.taxon || 'All',
       urgency: req.query.urgency || 'All',
       validation_status: req.query.validation_status || 'All'
     };
-    const incidents = getAllIncidents(filters);
-    res.json({ success: true, count: incidents.length, data: incidents });
+    const rawIncidents = getAllIncidents(filters);
+    const incidents = rawIncidents.map((inc) => redactIncidentForRole(inc, req.user));
+    res.json({
+      success: true,
+      access_tier: req.user.role,
+      protection_active: false,
+      confidential_locked: false,
+      count: incidents.length,
+      data: incidents
+    });
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });
   }
@@ -246,8 +432,284 @@ app.post('/api/reports', async (req, res) => {
   }
 });
 
-// 3. Multi-Platform Social Media Harvester (Real Meta Graph API & Twitter API)
-app.post('/api/social/harvest', async (req, res) => {
+// 2B. Offshore Maritime Phase-1 Geo-Beacon Endpoint (Idempotent, <500 bytes, 2G-resilient)
+app.post('/api/reports/beacon', (req, res) => {
+  try {
+    const b = req.body || {};
+    const clientUuid = b.client_uuid || `miis-${Date.now()}`;
+
+    // Strict idempotency: flaky sea connections retrying the same beacon NEVER duplicate records
+    const existing = getBeaconByClientUuid(clientUuid);
+    if (existing) {
+      return res.json({
+        success: true,
+        deduplicated: true,
+        message: 'Geo-beacon already synchronized (idempotent retry).',
+        client_uuid: existing.client_uuid,
+        report_id: existing.report_id,
+        incident_id: existing.incident_id,
+        media_status: existing.media_status,
+        points_earned: 20,
+      });
+    }
+
+    const coordCheck = validateMaritimeLatLon(b.latitude, b.longitude);
+    if (!coordCheck.valid) {
+      return res.status(400).json({ success: false, error: coordCheck.reason });
+    }
+
+    // Enforce Sri Lanka authoritative District -> Province integrity at ingest time
+    const cleanDistrict = SL_DISTRICT_TO_PROVINCE[b.district] ? b.district : (b.district || 'Colombo');
+    const authProvince = SL_DISTRICT_TO_PROVINCE[cleanDistrict] || b.province || 'Western';
+
+    const reportId = `SEA-REP-${Date.now()}`;
+    const incidentId = `INC-SEA-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
+    const nowIso = new Date().toISOString();
+    const observedAt = b.observed_at || b.gps_locked_at || nowIso;
+    const accM = Number(b.gps_accuracy_m) || 25;
+    const isUrgent = b.condition_status === 'Alive' || b.condition_status === 'Entangled' || b.event_type === 'Oil pollution' || b.taxon_group === 'Dugong';
+
+    const beaconRecord = {
+      client_uuid: clientUuid,
+      incident_id: incidentId,
+      report_id: reportId,
+      ingest_channel: b.ingest_channel || 'http_beacon',
+      observed_at: observedAt,
+      gps_locked_at: b.gps_locked_at || observedAt,
+      beacon_received_at: nowIso,
+      media_received_at: null,
+      latitude: coordCheck.latitude,
+      longitude: coordCheck.longitude,
+      gps_accuracy_m: accM,
+      fix_quality: b.fix_quality || (accM <= 15 ? 'EXCELLENT_GNSS' : accM <= 50 ? 'GOOD_GNSS' : 'DEGRADED_FIX'),
+      location_source: b.location_source || 'Hardware GNSS (Offshore Beacon)',
+      maritime_zone: b.maritime_zone || 'Coastal / Nearshore Sea',
+      distance_to_coast_km: Number(b.distance_to_coast_km) || 0,
+      province: authProvince,
+      district: cleanDistrict,
+      location_name: b.location_name || `${cleanDistrict} Coast (${coordCheck.latitude}, ${coordCheck.longitude})`,
+      event_type: b.event_type || 'Washed-ashore animal',
+      taxon_group: b.taxon_group || 'Sea turtle',
+      condition_status: b.condition_status || 'Dead',
+      number_observed: parseInt(b.number_observed, 10) || 1,
+      reporter_role: b.reporter_role || 'Fisher / Sea Observer',
+      vessel_id: b.vessel_id || '',
+      beacon_status: 'synced',
+      media_status: b.has_deferred_media ? 'deferred_for_harbour' : 'none',
+      exif_latitude: null,
+      exif_longitude: null,
+      exif_captured_at: null,
+      exif_drift_km: null,
+      photo_filename: null,
+      photo_kb: null,
+      photo_data_url: null,
+      sms_packet: b.sms_packet || null,
+      reporter_user_id: req.user?.sub || b.reporter_user_id || null,
+    };
+
+    insertMaritimeBeacon(beaconRecord);
+
+    insertCitizenReport({
+      report_id: reportId,
+      user_id: b.vessel_id ? `VESSEL-${b.vessel_id}` : `FISHER-${clientUuid.slice(0, 6).toUpperCase()}`,
+      submitted_at: nowIso,
+      observed_at: observedAt,
+      event_type: beaconRecord.event_type,
+      taxon_group: beaconRecord.taxon_group,
+      species_guess: b.species_guess || beaconRecord.taxon_group,
+      condition_status: beaconRecord.condition_status,
+      quantity_range: String(beaconRecord.number_observed),
+      number_observed: beaconRecord.number_observed,
+      latitude: coordCheck.latitude,
+      longitude: coordCheck.longitude,
+      gps_accuracy_m: accM,
+      location_name: beaconRecord.location_name,
+      photo_urls: JSON.stringify([]),
+      video_urls: JSON.stringify([]),
+      notes: `${b.notes || ''} [Sea Beacon Sync | GNSS ±${accM}m | Zone: ${beaconRecord.maritime_zone}]`.trim(),
+      pollution_oil: b.pollution_oil ? 1 : 0,
+      pollution_plastic: b.pollution_plastic ? 1 : 0,
+      pollution_nurdles: b.pollution_nurdles ? 1 : 0,
+      pollution_net: b.pollution_net ? 1 : 0,
+      pollution_chemical_smell: b.pollution_chemical_smell ? 1 : 0,
+      injury_visible: b.injury_visible ? 1 : 0,
+      ai_taxon_prediction: beaconRecord.taxon_group,
+      ai_event_prediction: beaconRecord.event_type,
+      ai_confidence: accM <= 50 ? 92 : 78,
+      duplicate_risk: 0.0,
+      review_status: b.has_deferred_media ? 'Geo-Synced (Awaiting Harbour Photo)' : 'Under Review',
+      expert_validation_status: 'Level 1 (Offshore GNSS Beacon)',
+      final_incident_id: incidentId,
+      points_awarded: 20,
+      safety_warning_shown: 1,
+      public_visibility: 'public',
+    });
+
+    insertIncident({
+      incident_id: incidentId,
+      event_date: observedAt.split('T')[0],
+      event_date_precision: 'Exact (GNSS UTC)',
+      report_date: nowIso.split('T')[0],
+      country: 'Sri Lanka',
+      province: authProvince,
+      district: cleanDistrict,
+      ds_division: '',
+      nearest_town: beaconRecord.location_name,
+      location_name: beaconRecord.location_name,
+      original_location_text: b.notes || `Fisher beacon (${beaconRecord.maritime_zone})`,
+      site_type: beaconRecord.maritime_zone,
+      latitude: coordCheck.latitude,
+      longitude: coordCheck.longitude,
+      spatial_precision: accM <= 50 ? 'exact_gnss' : 'degraded_gnss',
+      coordinate_confidence: accM <= 15 ? 'high' : accM <= 50 ? 'medium' : 'low',
+      coordinate_source: beaconRecord.location_source,
+      gps_accuracy_m: accM,
+      uncertainty_radius_km: Number((accM / 1000).toFixed(3)),
+      distance_to_coast_km: beaconRecord.distance_to_coast_km,
+      location_validation_status: 'EEZ Geofence Verified',
+      event_type: beaconRecord.event_type,
+      taxon_group: beaconRecord.taxon_group,
+      species_common: b.species_guess || beaconRecord.taxon_group,
+      species_scientific: b.species_scientific || 'Pending visual/expert ID',
+      condition_status: beaconRecord.condition_status,
+      number_dead: beaconRecord.condition_status === 'Dead' ? beaconRecord.number_observed : 0,
+      number_alive: beaconRecord.condition_status === 'Alive' ? beaconRecord.number_observed : 0,
+      quantity_text: `${beaconRecord.number_observed} observed`,
+      number_precision: 'exact',
+      cause_category: b.pollution_net ? 'Fisheries Interaction / Entanglement' : b.pollution_oil ? 'Oil / Chemical Pollution' : 'Maritime Observation',
+      suspected_cause: b.pollution_net ? 'Fishing gear / ghost net' : b.notes || 'Reported via Offshore Fisher Beacon',
+      cause_certainty: 'Medium',
+      urgency_level: isUrgent ? 'critical' : 'high',
+      response_status: b.has_deferred_media ? 'Geo-Locked (Media Pending)' : 'Under Triage',
+      confidence_score: accM <= 50 ? 90 : 75,
+      confidence_class: accM <= 50 ? 'High spatial confidence' : 'Medium spatial confidence',
+      validation_level: 'Level 1',
+      validation_status: 'Offshore GNSS Locked',
+      duplicate_group_id: null,
+      public_visibility: 'Public',
+      sensitive_location: beaconRecord.taxon_group === 'Sea turtle' || beaconRecord.taxon_group === 'Dugong' ? 1 : 0,
+      notes: `Offshore Beacon [${clientUuid.slice(0, 8)}] | Observed: ${observedAt} | GNSS ±${accM}m (${beaconRecord.fix_quality}) | ${b.notes || ''}`.trim(),
+      created_at: nowIso,
+      updated_at: nowIso,
+    });
+
+    insertReward({
+      reward_id: `REW-SEA-${Date.now()}`,
+      user_id: b.vessel_id || `FISHER-${clientUuid.slice(0, 6).toUpperCase()}`,
+      report_id: reportId,
+      reward_type: 'Offshore Geo-Beacon',
+      points: 20,
+      badge_name: 'MIIS Sea Sentinel',
+      reason: `Locked verified GNSS (±${accM}m) in ${cleanDistrict} (${beaconRecord.maritime_zone}).`,
+    });
+
+    res.json({
+      success: true,
+      deduplicated: false,
+      message: 'Phase 1 Geo-Beacon received and georeferenced immediately.',
+      client_uuid: clientUuid,
+      report_id: reportId,
+      incident_id: incidentId,
+      province: authProvince,
+      district: cleanDistrict,
+      media_status: beaconRecord.media_status,
+      points_earned: 20,
+      ai_triage: {
+        taxon_group: beaconRecord.taxon_group,
+        confidence_score: accM <= 50 ? 92 : 78,
+      },
+    });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// 2C. Offshore Maritime Phase-2 Deferred Harbour Photo Attachment + EXIF Drift Audit
+app.post('/api/reports/:clientUuid/media', (req, res) => {
+  try {
+    const { clientUuid } = req.params;
+    const beacon = getBeaconByClientUuid(clientUuid);
+    if (!beacon) {
+      return res.status(404).json({ success: false, error: 'Parent Geo-Beacon not found. Sync Phase 1 beacon first.' });
+    }
+
+    const { photo_data_url, photo_filename, photo_kb, exif_metadata } = req.body || {};
+    if (!photo_data_url) {
+      return res.status(400).json({ success: false, error: 'No photo payload supplied.' });
+    }
+
+    let exifDriftKm = null;
+    const exifLat = exif_metadata?.latitude ?? null;
+    const exifLon = exif_metadata?.longitude ?? null;
+    if (exifLat !== null && exifLon !== null && beacon.latitude && beacon.longitude) {
+      exifDriftKm = Number(haversineKmServer(beacon.latitude, beacon.longitude, exifLat, exifLon).toFixed(2));
+    }
+
+    attachMediaToBeacon(clientUuid, {
+      media_received_at: new Date().toISOString(),
+      exif_latitude: exifLat,
+      exif_longitude: exifLon,
+      exif_captured_at: exif_metadata?.captured_at || null,
+      exif_drift_km: exifDriftKm,
+      photo_filename: photo_filename || 'harbour_sync.jpg',
+      photo_kb: photo_kb || Math.round((photo_data_url.length * 3) / 4 / 1024),
+      photo_data_url: photo_data_url.slice(0, 1200000),
+    });
+
+    res.json({
+      success: true,
+      message: 'Phase 2 deferred photo attached to offshore beacon.',
+      client_uuid: clientUuid,
+      incident_id: beacon.incident_id,
+      media_status: 'synced',
+      exif_drift_km: exifDriftKm,
+      drift_warning: exifDriftKm !== null && exifDriftKm > 0.5,
+      bonus_points: 10,
+    });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// 2D. Multi-channel 2G GSM SMS routes mounted via server/sms_gateway.js
+// (POST /api/reports/sms-ingest, /api/sms/webhook/android-forwarder, /api/sms/webhook/twilio, /api/sms/webhook/sim800l)
+
+// 2E. List Maritime Beacons Telemetry (Validators/Admins only — contains exact GPS & vessel IDs)
+app.get('/api/reports/beacons', requireRole('validator', 'admin'), (req, res) => {
+  try {
+    const beacons = getAllMaritimeBeacons();
+    logSecurityAudit({ user: req.user, action: 'VIEW_OFFSHORE_BEACONS', resource: '/api/reports/beacons', details: `Viewed ${beacons.length} maritime beacons`, ip: req.ip });
+    res.json({ success: true, count: beacons.length, data: beacons });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// Protected national statistical trends & QA summary (Validators & Admins ONLY!)
+app.get('/api/ministry-trends', requireRole('validator', 'admin'), (req, res) => {
+  try {
+    const trendPath = path.join(__dirname, '..', 'analysis', 'outputs', 'trend_summary.json');
+    const fallbackTrendPath = path.join(__dirname, '..', 'src', 'data', 'ministry_trends_summary.json');
+    const qaPath = path.join(__dirname, '..', 'data', 'processed', 'quality_summary.json');
+    const trends = fs.existsSync(trendPath)
+      ? JSON.parse(fs.readFileSync(trendPath, 'utf8'))
+      : (fs.existsSync(fallbackTrendPath) ? JSON.parse(fs.readFileSync(fallbackTrendPath, 'utf8')) : null);
+    const quality = fs.existsSync(qaPath) ? JSON.parse(fs.readFileSync(qaPath, 'utf8')) : null;
+    logSecurityAudit({
+      user: req.user,
+      action: 'CONFIDENTIAL_TRENDS_ACCESS',
+      resource: '/api/ministry-trends',
+      details: 'Accessed confidential national trends summary',
+      ip: req.ip,
+    });
+    res.json({ success: true, trends, quality });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// 3. Multi-Platform Social Media Harvester (Validators / Admins only)
+app.post('/api/social/harvest', requireRole('validator', 'admin'), async (req, res) => {
   try {
     const { platform = 'All', keyword = 'marine wildlife Sri Lanka' } = req.body;
     const realFetchedPosts = [];
@@ -411,8 +873,8 @@ app.post('/api/social/harvest', async (req, res) => {
   }
 });
 
-// 4. Get all media sources
-app.get('/api/sources', (req, res) => {
+// 4. Get media sources (Validators / Admins ONLY — confidential harvested posts)
+app.get('/api/sources', requireRole('validator', 'admin'), (req, res) => {
   try {
     const sources = getAllSources();
     res.json({ success: true, count: sources.length, data: sources });
@@ -421,8 +883,8 @@ app.get('/api/sources', (req, res) => {
   }
 });
 
-// 5. Expert Reviewer Validation Endpoint
-app.post('/api/validate/:id', (req, res) => {
+// 5. Expert Reviewer Validation Endpoint (STRICTLY Validator / Admin RBAC)
+app.post('/api/validate/:id', requireRole('validator', 'admin'), (req, res) => {
   try {
     const { validation_status, validation_level, confidence_score } = req.body;
 
@@ -433,17 +895,25 @@ app.post('/api/validate/:id', (req, res) => {
       confidence_score || 95
     );
 
+    logSecurityAudit({
+      user: req.user,
+      action: 'EXPERT_VALIDATE_INCIDENT',
+      resource: `/api/validate/${req.params.id}`,
+      details: `Set ${req.params.id} -> ${validation_status || 'Expert Verified'} (${validation_level || 'Level 3'}, ${confidence_score || 95}%)`,
+      ip: req.ip,
+    });
+
     res.json({
       success: true,
-      message: `Incident ${req.params.id} updated to status: ${validation_status} (Level ${validation_level}).`
+      message: `Incident ${req.params.id} updated to status: ${validation_status} (Level ${validation_level}) by ${req.user.full_name}.`
     });
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });
   }
 });
 
-// 6. Analytics & Indicator Stats
-app.get('/api/stats', (req, res) => {
+// 6. Analytics & Indicator Stats (Validators / Admins ONLY — confidential aggregates)
+app.get('/api/stats', requireRole('validator', 'admin'), (req, res) => {
   try {
     const incidents = getAllIncidents();
     const reports = getAllCitizenReports();

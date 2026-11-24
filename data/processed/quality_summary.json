@@ -1,0 +1,85 @@
+{
+  "generated_at": "2026-11-24T08:12:38",
+  "pipeline_version": "MIIS-QA-v2.0",
+  "raw_file": "data\\raw\\Wildlife_mortality_raw.xlsx",
+  "raw_rows_excluding_header": 541,
+  "blank_rows_removed": 25,
+  "records_retained": 516,
+  "dates": {
+    "excel_datetime_cells": 187,
+    "text_cells": 328,
+    "missing": 1,
+    "day_month_swapped_and_fixed": 167,
+    "same_day_month_unambiguous": 20,
+    "chronology_violations_if_stored_value_used": 24,
+    "chronology_violations_after_swap_fix": 1,
+    "residual_out_of_sequence_records": [
+      {
+        "record_no": 487,
+        "date": "2023-01-07",
+        "prev_record_no": 486,
+        "prev_date": "2023-01-08",
+        "delta_days": -1
+      }
+    ],
+    "date_range": [
+      "2021-05-27",
+      "2026-06-30"
+    ]
+  },
+  "location": {
+    "province_contains_place_name": 2,
+    "column_shift_recovered": 1,
+    "province_district_mismatch_corrected": 10,
+    "province_missing_filled": 1,
+    "district_spelling_standardised": 13,
+    "district_imputed_from_place": 2,
+    "district_corrected_from_place": 13,
+    "non_coastal_district_in_raw": 1,
+    "place_missing": 29,
+    "place_not_in_gazetteer": 0,
+    "no_location_at_all": 1,
+    "coord_precision_counts": {
+      "locality": 484,
+      "town": 2,
+      "district": 29,
+      "none": 1
+    }
+  },
+  "taxonomy": {
+    "scientific_name_standardised": 7,
+    "species_not_identified": 60,
+    "taxon_missing": 7,
+    "taxon_group_counts": {
+      "Sea turtle": 438,
+      "Cetacean": 70,
+      "Sirenian": 1,
+      "Unknown": 7
+    }
+  },
+  "duplicates": {
+    "records_in_same_day_site_species_groups": 89,
+    "review_groups": 37,
+    "largest_group": 6,
+    "policy": "Flagged, not removed: each row in the ministry register represents an individual carcass; absence of carcass IDs/GPS/photos prevents distinguishing mass strandings from duplicate reports without field metadata."
+  },
+  "qc_status_counts": {
+    "cleaned_with_flags": 231,
+    "clean": 285
+  },
+  "change_log_entries": 669,
+  "change_log_by_rule": {
+    "R10_PROVINCE_SPELLING": 122,
+    "R11_SCI_NAME_STANDARDISED": 7,
+    "R12_PLACEHOLDER_TO_NULL": 1,
+    "R1_DATE_DAY_MONTH_SWAP": 167,
+    "R2_DATE_TEXT_PARSE": 328,
+    "R3_COLUMN_SHIFT": 1,
+    "R4_DISTRICT_SPELLING": 13,
+    "R5_DISTRICT_FROM_PLACE": 2,
+    "R6_DISTRICT_PLACE_CONFLICT": 13,
+    "R7_PROVINCE_FILLED": 3,
+    "R8_PROVINCE_INVALID_VALUE": 2,
+    "R9_PROVINCE_DISTRICT_MISMATCH": 10
+  }
+}

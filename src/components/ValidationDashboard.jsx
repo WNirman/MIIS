@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ShieldCheck, AlertCircle, Check, X, Copy, Award, Sliders, ExternalLink } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
-export default function ValidationDashboard({ incidents, onValidate }) {
+export default function ValidationDashboard({ incidents, onValidate, authHeaders = {} }) {
   const { t } = useLanguage();
   const [selectedItem, setSelectedItem] = useState(incidents[0] || null);
   const [confidence, setConfidence] = useState(90);
@@ -34,7 +34,7 @@ export default function ValidationDashboard({ incidents, onValidate }) {
     try {
       const res = await fetch(`/api/validate/${incId}`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', ...authHeaders },
         body: JSON.stringify({
           validation_status: validationStatus,
           validation_level: validationLevel,

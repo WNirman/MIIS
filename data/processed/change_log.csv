@@ -1,0 +1,670 @@
+record_no,field,old_value,new_value,rule,reason
+1,event_date,27/05/2021,2021-05-27,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+2,event_date,28/05/2021,2021-05-28,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+3,event_date,2021-01-06,2021-06-01,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+4,event_date,2021-02-06,2021-06-02,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+5,event_date,2021-02-06,2021-06-02,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+6,event_date,2021-03-06,2021-06-03,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+7,event_date,2021-03-06,2021-06-03,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+8,event_date,2021-04-06,2021-06-04,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+9,event_date,2021-05-06,2021-06-05,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+10,event_date,2021-05-06,2021-06-05,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+11,event_date,2021-05-06,2021-06-05,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+12,event_date,2021-05-06,2021-06-05,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+22,event_date,2021-07-06,2021-06-07,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+23,event_date,2021-07-06,2021-06-07,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+24,event_date,2021-07-06,2021-06-07,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+25,event_date,2021-07-06,2021-06-07,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+26,event_date,2021-07-06,2021-06-07,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+27,event_date,2021-08-06,2021-06-08,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+28,event_date,2021-08-06,2021-06-08,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+29,event_date,2021-09-06,2021-06-09,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+30,event_date,2021-09-06,2021-06-09,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+31,event_date,2021-09-06,2021-06-09,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+32,event_date,2021-09-06,2021-06-09,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+33,event_date,2021-10-06,2021-06-10,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+34,event_date,2021-10-06,2021-06-10,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+35,event_date,2021-10-06,2021-06-10,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+36,event_date,2021-10-06,2021-06-10,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+37,event_date,2021-10-06,2021-06-10,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+38,event_date,2021-11-06,2021-06-11,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+39,event_date,2021-12-06,2021-06-12,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+40,event_date,2021-12-06,2021-06-12,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+41,event_date,2021-12-06,2021-06-12,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+42,event_date,2021-12-06,2021-06-12,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+43,event_date,2021-12-06,2021-06-12,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+44,event_date,2021-12-06,2021-06-12,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+45,event_date,2021-12-06,2021-06-12,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+46,event_date,13/06/2021,2021-06-13,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+47,event_date,13/06/2021,2021-06-13,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+48,event_date,13/06/2021,2021-06-13,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+49,event_date,14/06/2021,2021-06-14,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+50,event_date,14/06/2021,2021-06-14,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+51,event_date,14/06/2021,2021-06-14,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+52,event_date,14/06/2021,2021-06-14,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+53,event_date,14/06/2021,2021-06-14,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+54,event_date,14/06/2021,2021-06-14,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+55,event_date,14/06/2021,2021-06-14,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+56,event_date,14/06/2021,2021-06-14,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+57,event_date,14/06/2021,2021-06-14,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+58,event_date,14/06/2021,2021-06-14,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+59,event_date,14/06/2021,2021-06-14,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+60,event_date,15/06/2021,2021-06-15,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+61,event_date,15/06/2021,2021-06-15,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+62,event_date,15/06/2021,2021-06-15,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+63,event_date,16/06/2021,2021-06-16,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+64,event_date,16/06/2021,2021-06-16,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+65,event_date,16/06/2021,2021-06-16,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+66,event_date,16/06/2021,2021-06-16,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+67,event_date,16/06/2021,2021-06-16,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+68,event_date,16/06/2021,2021-06-16,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+69,event_date,16/06/2021,2021-06-16,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+70,event_date,16/06/2021,2021-06-16,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+71,event_date,16/06/2021,2021-06-16,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+72,event_date,16/06/2021,2021-06-16,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+73,event_date,16/06/2021,2021-06-16,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+74,event_date,16/06/2021,2021-06-16,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+75,event_date,17/06/2021,2021-06-17,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+76,event_date,17/06/2021,2021-06-17,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+77,event_date,17/06/2021,2021-06-17,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+78,event_date,17/06/2021,2021-06-17,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+79,event_date,17/06/2021,2021-06-17,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+80,event_date,17/06/2021,2021-06-17,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+81,event_date,17/06/2021,2021-06-17,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+82,event_date,17/06/2021,2021-06-17,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+83,event_date,17/06/2021,2021-06-17,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+84,event_date,17/06/2021,2021-06-17,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+85,event_date,17/06/2021,2021-06-17,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+86,event_date,18/06/2021,2021-06-18,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+87,event_date,18/06/2021,2021-06-18,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+88,event_date,18/06/2021,2021-06-18,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+89,event_date,18/06/2021,2021-06-18,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+90,event_date,18/06/2021,2021-06-18,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+91,event_date,19/06/2021,2021-06-19,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+92,event_date,19/06/2021,2021-06-19,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+93,event_date,19/06/2021,2021-06-19,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+94,event_date,19/06/2021,2021-06-19,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+95,event_date,19/06/2021,2021-06-19,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+96,event_date,19/06/2021,2021-06-19,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+97,event_date,19/06/2021,2021-06-19,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+98,event_date,19/06/2021,2021-06-19,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+99,event_date,19/06/2021,2021-06-19,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+100,event_date,19/06/2021,2021-06-19,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+101,event_date,19/06/2021,2021-06-19,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+102,event_date,19/06/2021,2021-06-19,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+103,event_date,19/06/2021,2021-06-19,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+104,event_date,19/06/2021,2021-06-19,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+105,event_date,19/06/2021,2021-06-19,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+106,event_date,19/06/2021,2021-06-19,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+107,event_date,19/06/2021,2021-06-19,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+108,event_date,19/06/2021,2021-06-19,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+109,event_date,19/06/2021,2021-06-19,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+110,event_date,20/06/2021,2021-06-20,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+111,event_date,20/06/2021,2021-06-20,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+112,event_date,20/06/2021,2021-06-20,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+113,event_date,20/06/2021,2021-06-20,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+114,event_date,20/06/2021,2021-06-20,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+115,event_date,20/06/2021,2021-06-20,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+116,event_date,20/06/2021,2021-06-20,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+117,event_date,20/06/2021,2021-06-20,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+118,event_date,20/06/2021,2021-06-20,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+119,event_date,20/06/2021,2021-06-20,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+120,event_date,20/06/2021,2021-06-20,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+121,event_date,20/06/2021,2021-06-20,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+122,event_date,20/06/2021,2021-06-20,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+123,event_date,20/06/2021,2021-06-20,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+124,event_date,21/06/2021,2021-06-21,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+125,event_date,21/06/2021,2021-06-21,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+126,event_date,21/06/2021,2021-06-21,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+127,event_date,21/06/2021,2021-06-21,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+128,event_date,21/06/2021,2021-06-21,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+129,event_date,21/06/2021,2021-06-21,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+130,event_date,21/06/2021,2021-06-21,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+131,event_date,21/06/2021,2021-06-21,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+132,event_date,21/06/2021,2021-06-21,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+133,event_date,21/06/2021,2021-06-21,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+134,event_date,21/06/2021,2021-06-21,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+135,event_date,21/06/2021,2021-06-21,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+136,event_date,21/06/2021,2021-06-21,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+137,event_date,21/06/2021,2021-06-21,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+138,event_date,22/06/2021,2021-06-22,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+139,event_date,22/06/2021,2021-06-22,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+140,event_date,22/06/2021,2021-06-22,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+141,event_date,22/06/2021,2021-06-22,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+142,event_date,22/06/2021,2021-06-22,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+143,event_date,22/06/2021,2021-06-22,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+144,event_date,22/06/2021,2021-06-22,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+145,event_date,23/06/2021,2021-06-23,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+146,event_date,23/06/2021,2021-06-23,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+147,event_date,23/06/2021,2021-06-23,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+148,event_date,23/06/2021,2021-06-23,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+149,event_date,23/06/2021,2021-06-23,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+150,event_date,23/06/2021,2021-06-23,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+151,event_date,23/06/2021,2021-06-23,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+152,event_date,23/06/2021,2021-06-23,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+153,event_date,23/06/2021,2021-06-23,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+154,event_date,23/06/2021,2021-06-23,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+155,event_date,23/06/2021,2021-06-23,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+156,event_date,24/06/2021,2021-06-24,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+157,event_date,24/06/2021,2021-06-24,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+158,event_date,24/06/2021,2021-06-24,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+159,event_date,24/06/2021,2021-06-24,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+160,event_date,24/06/2021,2021-06-24,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+161,event_date,24/06/2021,2021-06-24,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+162,event_date,24/06/2021,2021-06-24,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+163,event_date,24/06/2021,2021-06-24,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+164,event_date,24/06/2021,2021-06-24,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+165,event_date,24/06/2021,2021-06-24,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+166,event_date,24/06/2021,2021-06-24,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+167,event_date,24/06/2021,2021-06-24,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+168,event_date,24/06/2021,2021-06-24,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+169,event_date,24/06/2021,2021-06-24,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+170,event_date,24/06/2021,2021-06-24,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+171,event_date,25/06/2021,2021-06-25,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+172,event_date,25/06/2021,2021-06-25,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+173,event_date,25/06/2021,2021-06-25,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+174,event_date,25/06/2021,2021-06-25,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+175,event_date,25/06/2021,2021-06-25,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+176,event_date,25/06/2021,2021-06-25,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+177,event_date,25/06/2021,2021-06-25,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+178,event_date,26/06/2021,2021-06-26,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+179,event_date,26/06/2021,2021-06-26,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+180,event_date,26/06/2021,2021-06-26,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+181,event_date,26/06/2021,2021-06-26,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+182,event_date,26/06/2021,2021-06-26,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+183,event_date,27/06/2021,2021-06-27,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+184,event_date,27/06/2021,2021-06-27,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+185,event_date,27/06/2021,2021-06-27,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+186,event_date,27/06/2021,2021-06-27,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+187,event_date,27/06/2021,2021-06-27,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+188,event_date,27/06/2021,2021-06-27,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+189,event_date,27/06/2021,2021-06-27,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+190,event_date,27/06/2021,2021-06-27,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+191,event_date,28/06/2021,2021-06-28,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+192,event_date,28/06/2021,2021-06-28,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+193,event_date,28/06/2021,2021-06-28,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+194,event_date,28/06/2021,2021-06-28,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+195,event_date,28/06/2021,2021-06-28,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+196,event_date,28/06/2021,2021-06-28,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+197,event_date,28/06/2021,2021-06-28,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+198,event_date,29/06/2021,2021-06-29,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+199,event_date,29/06/2021,2021-06-29,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+200,event_date,29/06/2021,2021-06-29,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+201,event_date,29/06/2021,2021-06-29,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+202,event_date,29/06/2021,2021-06-29,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+203,event_date,29/06/2021,2021-06-29,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+204,event_date,29/06/2021,2021-06-29,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+205,event_date,29/06/2021,2021-06-29,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+206,event_date,30/06/2021,2021-06-30,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+207,event_date,30/06/2021,2021-06-30,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+208,event_date,30/06/2021,2021-06-30,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+209,event_date,2021-01-07,2021-07-01,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+210,event_date,2021-01-07,2021-07-01,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+211,event_date,2021-01-07,2021-07-01,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+212,event_date,2021-01-07,2021-07-01,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+213,event_date,2021-01-07,2021-07-01,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+214,event_date,2021-01-07,2021-07-01,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+215,event_date,2021-02-07,2021-07-02,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+216,event_date,2021-02-07,2021-07-02,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+217,event_date,2021-02-07,2021-07-02,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+218,event_date,2021-02-07,2021-07-02,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+219,event_date,2021-02-07,2021-07-02,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+220,event_date,2021-02-07,2021-07-02,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+221,event_date,2021-02-07,2021-07-02,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+222,event_date,2021-02-07,2021-07-02,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+223,event_date,2021-03-07,2021-07-03,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+224,event_date,2021-03-07,2021-07-03,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+225,event_date,2021-03-07,2021-07-03,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+226,event_date,2021-03-07,2021-07-03,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+227,event_date,2021-03-07,2021-07-03,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+228,event_date,2021-03-07,2021-07-03,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+229,event_date,2021-03-07,2021-07-03,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+230,event_date,2021-03-07,2021-07-03,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+231,event_date,2021-03-07,2021-07-03,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+232,event_date,2021-03-07,2021-07-03,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+233,event_date,2021-03-07,2021-07-03,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+234,event_date,2021-03-07,2021-07-03,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+235,event_date,2021-03-07,2021-07-03,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+236,event_date,2021-03-07,2021-07-03,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+237,event_date,2021-04-07,2021-07-04,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+238,event_date,2021-04-07,2021-07-04,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+239,event_date,2021-04-07,2021-07-04,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+240,event_date,2021-04-07,2021-07-04,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+241,event_date,2021-04-07,2021-07-04,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+242,event_date,2021-04-07,2021-07-04,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+243,event_date,2021-04-07,2021-07-04,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+244,event_date,2021-04-07,2021-07-04,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+245,event_date,2021-05-07,2021-07-05,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+246,event_date,2021-05-07,2021-07-05,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+247,event_date,2021-05-07,2021-07-05,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+248,event_date,2021-05-07,2021-07-05,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+249,event_date,2021-06-07,2021-07-06,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+250,event_date,2021-06-07,2021-07-06,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+251,event_date,2021-06-07,2021-07-06,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+252,event_date,2021-08-07,2021-07-08,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+253,event_date,2021-08-07,2021-07-08,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+254,event_date,2021-09-07,2021-07-09,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+255,event_date,2021-10-07,2021-07-10,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+256,event_date,2021-11-07,2021-07-11,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+257,event_date,2021-11-07,2021-07-11,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+258,event_date,2021-11-07,2021-07-11,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+259,event_date,2021-11-07,2021-07-11,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+260,event_date,2021-11-07,2021-07-11,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+261,event_date,2021-11-07,2021-07-11,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+262,event_date,2021-11-07,2021-07-11,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+263,event_date,2021-11-07,2021-07-11,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+264,event_date,2021-11-07,2021-07-11,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+265,event_date,2021-11-07,2021-07-11,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+266,event_date,2021-11-07,2021-07-11,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+267,event_date,2021-12-07,2021-07-12,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+268,event_date,2021-12-07,2021-07-12,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+269,event_date,2021-12-07,2021-07-12,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+270,event_date,2021-12-07,2021-07-12,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+271,event_date,2021-12-07,2021-07-12,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+272,event_date,2021-12-07,2021-07-12,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+273,event_date,2021-12-07,2021-07-12,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+274,event_date,2021-12-07,2021-07-12,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+275,event_date,2021-12-07,2021-07-12,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+276,event_date,13/07/2021,2021-07-13,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+277,event_date,13/07/2021,2021-07-13,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+278,event_date,13/07/2021,2021-07-13,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+279,event_date,13/07/2021,2021-07-13,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+280,event_date,13/07/2021,2021-07-13,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+281,event_date,13/07/2021,2021-07-13,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+282,event_date,13/07/2021,2021-07-13,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+283,event_date,14/07/2021,2021-07-14,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+284,event_date,14/07/2021,2021-07-14,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+285,event_date,14/07/2021,2021-07-14,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+286,event_date,14/07/2021,2021-07-14,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+287,event_date,14/07/2021,2021-07-14,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+288,event_date,14/07/2021,2021-07-14,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+289,event_date,14/07/2021,2021-07-14,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+290,event_date,15/07/2021,2021-07-15,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+291,event_date,15/07/2021,2021-07-15,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+292,event_date,15/07/2021,2021-07-15,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+293,event_date,16/07/2021,2021-07-16,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+294,event_date,16/07/2021,2021-07-16,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+295,event_date,17/07/2021,2021-07-17,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+296,event_date,17/07/2021,2021-07-17,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+297,event_date,19/07/2021,2021-07-19,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+298,event_date,19/07/2021,2021-07-19,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+299,event_date,19/07/2021,2021-07-19,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+300,event_date,20/07/2021,2021-07-20,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+301,event_date,20/07/2021,2021-07-20,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+302,event_date,20/07/2021,2021-07-20,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+303,event_date,20/07/2021,2021-07-20,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+304,event_date,20/07/2021,2021-07-20,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+305,event_date,20/07/2021,2021-07-20,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+306,event_date,21/07/2021,2021-07-21,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+307,event_date,21/07/2021,2021-07-21,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+308,event_date,21/07/2021,2021-07-21,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+309,event_date,21/07/2021,2021-07-21,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+310,event_date,22/07/2021,2021-07-22,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+311,event_date,24/07/2021,2021-07-24,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+312,event_date,24/07/2021,2021-07-24,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+313,event_date,24/07/2021,2021-07-24,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+314,event_date,25/07/2021,2021-07-25,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+315,event_date,25/07/2021,2021-07-25,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+316,event_date,25/07/2021,2021-07-25,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+317,event_date,25/07/2021,2021-07-25,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+318,event_date,26/07/2021,2021-07-26,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+319,event_date,26/07/2021,2021-07-26,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+320,event_date,26/07/2021,2021-07-26,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+321,event_date,26/07/2021,2021-07-26,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+322,event_date,26/07/2021,2021-07-26,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+323,event_date,28/07/2021,2021-07-28,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+324,event_date,28/07/2021,2021-07-28,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+325,event_date,28/07/2021,2021-07-28,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+326,event_date,29/07/2021,2021-07-29,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+327,event_date,29/07/2021,2021-07-29,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+328,event_date,30/07/2021,2021-07-30,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+329,event_date,31/07/2021,2021-07-31,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+330,event_date,2021-01-08,2021-08-01,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+331,event_date,2021-01-08,2021-08-01,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+332,event_date,2021-01-08,2021-08-01,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+333,event_date,2021-01-08,2021-08-01,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+334,event_date,2021-02-08,2021-08-02,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+335,event_date,2021-02-08,2021-08-02,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+336,event_date,2021-02-08,2021-08-02,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+337,event_date,2021-02-08,2021-08-02,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+338,event_date,2021-03-08,2021-08-03,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+339,event_date,2021-05-08,2021-08-05,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+340,event_date,2021-07-08,2021-08-07,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+341,event_date,2021-07-08,2021-08-07,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+342,event_date,2021-07-08,2021-08-07,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+343,event_date,2021-07-08,2021-08-07,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+347,event_date,2021-09-08,2021-08-09,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+348,event_date,2021-10-08,2021-08-10,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+349,event_date,2021-10-08,2021-08-10,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+350,event_date,2021-11-08,2021-08-11,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+351,event_date,2021-12-08,2021-08-12,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+352,event_date,13/08/2021,2021-08-13,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+353,event_date,13/08/2021,2021-08-13,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+354,event_date,13/08/2021,2021-08-13,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+355,event_date,14/08/2021,2021-08-14,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+356,event_date,16/08/2021,2021-08-16,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+357,event_date,16/08/2021,2021-08-16,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+358,event_date,16/08/2021,2021-08-16,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+359,event_date,18/08/2021,2021-08-18,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+360,event_date,20/08/2021,2021-08-20,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+361,event_date,21/08/2021,2021-08-21,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+362,event_date,21/08/2021,2021-08-21,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+363,event_date,24/08/2021,2021-08-24,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+364,event_date,24/08/2021,2021-08-24,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+365,event_date,26/08/2021,2021-08-26,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+366,event_date,26/08/2021,2021-08-26,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+367,event_date,27/08/2021,2021-08-27,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+368,event_date,27/08/2021,2021-08-27,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+369,event_date,28/08/2021,2021-08-28,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+370,event_date,28/08/2021,2021-08-28,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+371,event_date,29/08/2021,2021-08-29,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+372,event_date,29/08/2021,2021-08-29,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+373,event_date,30/08/2021,2021-08-30,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+374,event_date,31/08/2021,2021-08-31,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+375,event_date,31/08/2021,2021-08-31,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+376,event_date,2021-01-09,2021-09-01,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+377,event_date,2021-01-09,2021-09-01,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+378,event_date,2021-02-09,2021-09-02,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+379,event_date,2021-02-09,2021-09-02,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+380,event_date,2021-03-09,2021-09-03,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+381,event_date,2021-03-09,2021-09-03,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+382,event_date,2021-03-09,2021-09-03,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+383,event_date,2021-04-09,2021-09-04,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+384,event_date,2021-05-09,2021-09-05,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+385,event_date,2021-05-09,2021-09-05,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+386,event_date,2021-06-09,2021-09-06,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+387,event_date,2021-06-09,2021-09-06,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+388,event_date,2021-07-09,2021-09-07,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+392,event_date,2021-10-09,2021-09-10,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+393,event_date,2021-12-09,2021-09-12,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+394,event_date,13/09/2021,2021-09-13,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+395,event_date,14/09/2021,2021-09-14,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+396,event_date,15/09/2021,2021-09-15,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+397,event_date,15/09/2021,2021-09-15,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+398,event_date,15/09/2021,2021-09-15,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+399,event_date,15/09/2021,2021-09-15,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+400,event_date,16/09/2021,2021-09-16,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+401,event_date,16/09/2021,2021-09-16,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+402,event_date,16/09/2021,2021-09-16,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+403,event_date,16/09/2021,2021-09-16,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+404,event_date,16/09/2021,2021-09-16,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+405,event_date,16/09/2021,2021-09-16,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+406,event_date,16/09/2021,2021-09-16,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+407,event_date,16/09/2021,2021-09-16,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+408,event_date,16/09/2021,2021-09-16,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+409,event_date,17/09/2021,2021-09-17,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+410,event_date,18/09/2021,2021-09-18,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+411,event_date,27/09/2021,2021-09-27,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+412,event_date,28/09/2021,2021-09-28,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+413,event_date,29/09/2021,2021-09-29,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+414,event_date,29/09/2021,2021-09-29,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+415,event_date,30/09/2021,2021-09-30,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+416,event_date,30/09/2021,2021-09-30,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+417,event_date,30/09/2021,2021-09-30,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+418,event_date,30/09/2021,2021-09-30,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+419,event_date,2021-09-10,2021-10-09,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+420,event_date,2021-12-10,2021-10-12,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+421,event_date,13/10/2021,2021-10-13,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+422,event_date,13/10/2021,2021-10-13,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+423,event_date,13/10/2021,2021-10-13,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+424,event_date,13/10/2021,2021-10-13,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+425,event_date,14/10/2021,2021-10-14,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+426,event_date,15/10/2021,2021-10-15,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+427,event_date,15/10/2021,2021-10-15,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+428,event_date,28/10/2021,2021-10-28,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+429,event_date,2021-06-11,2021-11-06,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+430,event_date,2021-06-11,2021-11-06,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+431,event_date,2021-10-11,2021-11-10,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+432,event_date,13/11/2021,2021-11-13,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+433,event_date,16/11/2021,2021-11-16,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+434,event_date,16/11/2021,2021-11-16,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+435,event_date,17/11/2021,2021-11-17,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+436,event_date,17/11/2021,2021-11-17,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+437,event_date,22/11/2021,2021-11-22,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+438,event_date,26/11/2021,2021-11-26,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+439,event_date,27/11/2021,2021-11-27,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+440,event_date,30/11/2021,2021-11-30,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+441,event_date,2021-09-12,2021-12-09,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+442,event_date,2021-10-12,2021-12-10,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+443,event_date,21/02/2022,2022-02-21,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+444,event_date,13/03/2022,2022-03-13,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+445,event_date,17/03/2022,2022-03-17,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+447,event_date,2022-09-05,2022-05-09,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+448,event_date,17/05/2022,2022-05-17,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+449,event_date,25/05/2022,2022-05-25,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+451,event_date,2022-11-06,2022-06-11,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+452,event_date,2022-12-06,2022-06-12,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+453,event_date,13/06/2022,2022-06-13,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+454,event_date,14/06/2022,2022-06-14,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+455,event_date,15/06/2022,2022-06-15,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+456,event_date,16/06/2022,2022-06-16,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+457,event_date,18/06/2022,2022-06-18,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+458,event_date,18/06/2022,2022-06-18,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+459,event_date,18/06/2022,2022-06-18,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+460,event_date,23/06/2022,2022-06-23,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+461,event_date,29/06/2022,2022-06-29,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+462,event_date,30/06/2022,2022-06-30,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+463,event_date,2022-03-09,2022-09-03,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+464,event_date,2022-12-09,2022-09-12,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+465,event_date,2022-12-09,2022-09-12,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+466,event_date,15/09/2022,2022-09-15,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+467,event_date,20/09/2022,2022-09-20,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+468,event_date,20/09/2022,2022-09-20,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+469,event_date,20/09/2022,2022-09-20,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+470,event_date,20/09/2022,2022-09-20,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+471,event_date,21/09/2022,2022-09-21,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+472,event_date,25/09/2022,2022-09-25,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+473,event_date,25/09/2022,2022-09-25,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+474,event_date,25/09/2022,2022-09-25,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+475,event_date,26/09/2022,2022-09-26,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+476,event_date,2022-01-10,2022-10-01,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+477,event_date,2022-01-10,2022-10-01,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+478,event_date,2022-03-10,2022-10-03,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+479,event_date,2022-05-10,2022-10-05,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+483,event_date,25/10/2022,2022-10-25,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+484,event_date,2022-03-11,2022-11-03,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+485,event_date,17/11/2022,2022-11-17,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+486,event_date,2023-08-01,2023-01-08,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+487,event_date,2023-07-01,2023-01-07,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+488,event_date,17/01/2023,2023-01-17,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+489,event_date,24/01/2023,2023-01-24,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+490,event_date,24/01/2023,2023-01-24,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+491,event_date,2023-11-02,2023-02-11,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+492,event_date,2023-11-02,2023-02-11,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+493,event_date,2023-11-02,2023-02-11,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+494,event_date,2023-12-02,2023-02-12,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+495,event_date,19/02/2023,2023-02-19,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+496,event_date,21/03/2023,2023-03-21,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+497,event_date,2025-11-06,2025-06-11,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+498,event_date,2025-11-06,2025-06-11,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+499,event_date,2025-11-06,2025-06-11,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+500,event_date,2025-11-06,2025-06-11,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+501,event_date,2025-11-06,2025-06-11,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+502,event_date,2025-11-06,2025-06-11,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+503,event_date,13/06/2025,2025-06-13,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+504,event_date,2025-12-07,2025-07-12,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+505,event_date,14/07/2025,2025-07-14,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+506,event_date,18/07/2025,2025-07-18,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+507,event_date,28/07/2025,2025-07-28,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+508,event_date,17/08/2025,2025-08-17,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+509,event_date,20/08/2025,2025-08-20,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+510,event_date,24/08/2025,2025-08-24,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+511,event_date,24/08/2025,2025-08-24,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+512,event_date,24/08/2025,2025-08-24,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+513,event_date,30/08/2025,2025-08-30,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+514,event_date,2026-08-05,2026-05-08,R1_DATE_DAY_MONTH_SWAP,US-locale Excel stored DD/MM/YYYY as MM/DD/YYYY when DD<=12; swap verified by chronological continuity
+516,event_date,30/06/2026,2026-06-30,R2_DATE_TEXT_PARSE,Literal text date parsed as DD/MM/YYYY to ISO-8601
+1,province,Galleface beach,,R8_PROVINCE_INVALID_VALUE,Place name 'Galleface beach' erroneously entered in Province column
+1,province,Galleface beach,Western,R7_PROVINCE_FILLED,Replaced invalid Province with 'Western' from District='Gampaha'
+2,district,Kalutara,Colombo,R6_DISTRICT_PLACE_CONFLICT,"Locality 'Egoda Uyana' lies in Colombo District (Survey Dept / DS boundary), not Kalutara"
+2,province,,Western,R7_PROVINCE_FILLED,Filled missing Province='Western' from District='Colombo'
+3,district,Matara,Hambantota,R6_DISTRICT_PLACE_CONFLICT,"Locality 'Kudawella' lies in Hambantota District (Survey Dept / DS boundary), not Matara"
+7,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+20,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+25,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+26,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+28,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+29,district,Matara,Hambantota,R6_DISTRICT_PLACE_CONFLICT,"Locality 'Rekawa' lies in Hambantota District (Survey Dept / DS boundary), not Matara"
+30,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+31,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+32,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+37,scientific_name,Sousa spp,Sousa sp.,R11_SCI_NAME_STANDARDISED,Standardised taxonomy/case/spelling -> Sousa sp.
+44,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+47,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+52,province,Southern,Western,R9_PROVINCE_DISTRICT_MISMATCH,"District 'Kalutara' belongs to Western Province, not Southern"
+54,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+55,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+56,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+57,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+58,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+59,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+60,scientific_name,Balaenoptera edeni/Balaenoptera musculus,Balaenoptera sp.,R11_SCI_NAME_STANDARDISED,Standardised taxonomy/case/spelling -> Balaenoptera sp.
+70,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+71,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+75,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+85,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+89,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+91,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+92,district,Baticaloa,Batticaloa,R4_DISTRICT_SPELLING,Spelling typo Baticaloa -> Batticaloa
+93,district,Baticaloa,Batticaloa,R4_DISTRICT_SPELLING,Spelling typo Baticaloa -> Batticaloa
+94,district,Baticaloa,Batticaloa,R4_DISTRICT_SPELLING,Spelling typo Baticaloa -> Batticaloa
+95,district,Baticaloa,Batticaloa,R4_DISTRICT_SPELLING,Spelling typo Baticaloa -> Batticaloa
+96,district,Baticaloa,Batticaloa,R4_DISTRICT_SPELLING,Spelling typo Baticaloa -> Batticaloa
+98,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+99,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+100,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+101,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+102,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+103,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+105,district,Galle,Kalutara,R6_DISTRICT_PLACE_CONFLICT,"Locality 'Moragalla (Beruwala)' lies in Kalutara District (Survey Dept / DS boundary), not Galle"
+105,province,Southern,Western,R9_PROVINCE_DISTRICT_MISMATCH,"District 'Kalutara' belongs to Western Province, not Southern"
+110,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+111,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+112,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+113,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+121,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+122,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+123,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+127,district,Baticaloa,Batticaloa,R4_DISTRICT_SPELLING,Spelling typo Baticaloa -> Batticaloa
+128,district,Baticaloa,Batticaloa,R4_DISTRICT_SPELLING,Spelling typo Baticaloa -> Batticaloa
+129,district,Baticaloa,Batticaloa,R4_DISTRICT_SPELLING,Spelling typo Baticaloa -> Batticaloa
+130,district,Baticaloa,Batticaloa,R4_DISTRICT_SPELLING,Spelling typo Baticaloa -> Batticaloa
+131,district,Baticaloa,Batticaloa,R4_DISTRICT_SPELLING,Spelling typo Baticaloa -> Batticaloa
+134,district,Baticaloa,Batticaloa,R4_DISTRICT_SPELLING,Spelling typo Baticaloa -> Batticaloa
+138,scientific_name,-,,R12_PLACEHOLDER_TO_NULL,Replaced dash placeholder '-' with null/unidentified
+149,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+157,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+158,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+159,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+160,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+170,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+171,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+172,province,Southern,Western,R9_PROVINCE_DISTRICT_MISMATCH,"District 'Kalutara' belongs to Western Province, not Southern"
+174,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+175,province,Southern,Western,R9_PROVINCE_DISTRICT_MISMATCH,"District 'Kalutara' belongs to Western Province, not Southern"
+176,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+182,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+184,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+185,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+186,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+187,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+190,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+193,district,Baticaloa,Batticaloa,R4_DISTRICT_SPELLING,Spelling typo Baticaloa -> Batticaloa
+196,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+196,scientific_name,Sousa spp,Sousa sp.,R11_SCI_NAME_STANDARDISED,Standardised taxonomy/case/spelling -> Sousa sp.
+198,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+200,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+201,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+202,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+204,province,Western,Southern,R9_PROVINCE_DISTRICT_MISMATCH,"District 'Galle' belongs to Southern Province, not Western"
+206,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+209,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+210,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+211,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+214,district,Galle,Matara,R6_DISTRICT_PLACE_CONFLICT,"Locality 'Weligama' lies in Matara District (Survey Dept / DS boundary), not Galle"
+215,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+216,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+217,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+218,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+219,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+220,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+221,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+223,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+224,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+225,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+226,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+227,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+228,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+229,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+230,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+231,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+237,scientific_name,Sousa spp,Sousa sp.,R11_SCI_NAME_STANDARDISED,Standardised taxonomy/case/spelling -> Sousa sp.
+238,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+244,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+253,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+258,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+264,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+265,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+268,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+269,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+270,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+271,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+276,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+277,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+278,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+279,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+283,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+290,district,Colombo,Kalutara,R6_DISTRICT_PLACE_CONFLICT,"Locality 'Blue Water (Wadduwa)' lies in Kalutara District (Survey Dept / DS boundary), not Colombo"
+291,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+296,district,Monaragala,Hambantota,R6_DISTRICT_PLACE_CONFLICT,"Locality 'Palatupana' lies in Hambantota District (Survey Dept / DS boundary), not Monaragala"
+310,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+315,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+318,district,Colombo,Kalutara,R6_DISTRICT_PLACE_CONFLICT,"Locality 'Panadura' lies in Kalutara District (Survey Dept / DS boundary), not Colombo"
+319,district,Colombo,Kalutara,R6_DISTRICT_PLACE_CONFLICT,"Locality 'Panadura' lies in Kalutara District (Survey Dept / DS boundary), not Colombo"
+323,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+325,district,Baticaloa,Batticaloa,R4_DISTRICT_SPELLING,Spelling typo Baticaloa -> Batticaloa
+330,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+331,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+345,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+346,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+351,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+356,district,Galle,Matara,R6_DISTRICT_PLACE_CONFLICT,"Locality 'Midigama' lies in Matara District (Survey Dept / DS boundary), not Galle"
+357,district,Galle,Matara,R6_DISTRICT_PLACE_CONFLICT,"Locality 'Midigama' lies in Matara District (Survey Dept / DS boundary), not Galle"
+369,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+384,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+385,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+393,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+411,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+414,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+423,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+430,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+431,province,Southern,Western,R9_PROVINCE_DISTRICT_MISMATCH,"District 'Kalutara' belongs to Western Province, not Southern"
+432,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+435,province,Southern,Western,R9_PROVINCE_DISTRICT_MISMATCH,"District 'Kalutara' belongs to Western Province, not Southern"
+438,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+440,district,Kilinochchi,Jaffna,R6_DISTRICT_PLACE_CONFLICT,"Locality 'Delft (Neduntheevu)' lies in Jaffna District (Survey Dept / DS boundary), not Kilinochchi"
+441,province,Southern,Western,R9_PROVINCE_DISTRICT_MISMATCH,"District 'Kalutara' belongs to Western Province, not Southern"
+443,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+444,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+450,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+452,district,,Kalutara,R5_DISTRICT_FROM_PLACE,Imputed District='Kalutara' from verified locality 'Panadura'
+476,province,Western,Southern,R9_PROVINCE_DISTRICT_MISMATCH,"District 'Galle' belongs to Southern Province, not Western"
+481,district,Colombo,Gampaha,R6_DISTRICT_PLACE_CONFLICT,"Locality 'Kepungoda (Pamunugama)' lies in Gampaha District (Survey Dept / DS boundary), not Colombo"
+485,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+485,scientific_name,Neophocena phocaenoides,Neophocaena phocaenoides,R11_SCI_NAME_STANDARDISED,Standardised taxonomy/case/spelling -> Neophocaena phocaenoides
+486,province,Western,Southern,R9_PROVINCE_DISTRICT_MISMATCH,"District 'Galle' belongs to Southern Province, not Western"
+487,scientific_name,delphinus delphis,Delphinus delphis,R11_SCI_NAME_STANDARDISED,Standardised taxonomy/case/spelling -> Delphinus delphis
+491,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+492,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+493,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+494,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+495,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+496,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+499,province,Galleface beach,,R8_PROVINCE_INVALID_VALUE,Place name 'Galleface beach' erroneously entered in Province column
+499,place_original_clean,,Galleface beach,R3_COLUMN_SHIFT,Recovered shifted place string from Province column into Place field
+499,district,,Colombo,R5_DISTRICT_FROM_PLACE,Imputed District='Colombo' from verified locality 'Galle Face'
+499,province,Galleface beach,Western,R7_PROVINCE_FILLED,Replaced invalid Province with 'Western' from District='Colombo'
+514,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+514,scientific_name,Dugong,Dugong dugon,R11_SCI_NAME_STANDARDISED,Standardised taxonomy/case/spelling -> Dugong dugon
+515,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western
+516,province,North western,North Western,R10_PROVINCE_SPELLING,Case standardisation: North western -> North Western

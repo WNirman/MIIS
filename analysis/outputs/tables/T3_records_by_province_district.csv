@@ -1,0 +1,13 @@
+province,district,Cetacean,Sea turtle,Sirenian,Unknown,Total,coastline_km,coast_sector,records_per_100km_coast
+North Western,Puttalam,28,93,1,0,122,295,Northwest Coast,41.4
+Western,Colombo,8,91,0,6,105,40,West Coast,262.5
+Western,Gampaha,8,80,0,1,89,45,West Coast,197.8
+Western,Kalutara,6,57,0,0,63,42,Southwest Coast,150.0
+Southern,Galle,4,50,0,0,54,73,Southwest Coast,74.0
+Northern,Mannar,3,18,0,0,21,196,Gulf of Mannar,10.7
+Eastern,Ampara,3,16,0,0,19,140,Southeast Coast,13.6
+Southern,Matara,3,11,0,0,14,55,South Coast,25.5
+Eastern,Batticaloa,3,10,0,0,13,145,East Coast,9.0
+Southern,Hambantota,1,7,0,0,8,145,South / Southeast Coast,5.5
+Northern,Jaffna,3,3,0,0,6,295,Northern Peninsula & Islands,2.0
+Northern,Kilinochchi,0,1,0,0,1,104,Northwest / Palk Bay,1.0

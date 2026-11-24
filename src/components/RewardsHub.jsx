@@ -22,7 +22,7 @@ export default function RewardsHub({ rewards, stats }) {
     { name: 'MIIS Turtle Watcher', desc: 'Reported & verified sea turtle stranding', icon: '🐢', unlocked: true },
     { name: 'MIIS Dolphin Sentinel', desc: 'Documented cetacean sighting/stranding', icon: '🐬', unlocked: true },
     { name: 'MIIS Whale Guardian', desc: 'Dispatched emergency alert for stranded whale', icon: '🐋', unlocked: false },
-    { name: 'MIIS Pollution Spotter', desc: 'Safely documented oil spill / nurdle washes', icon: '🛢️', unlocked: true },
+    { name: 'MIIS Pollution Spotter', desc: 'Safely documented coastal pollution or debris', icon: '🛢️', unlocked: true },
     { name: 'MIIS Data Quality Champion', desc: '10+ reports verified by marine scientists', icon: '⭐', unlocked: false }
   ];
 

@@ -1,0 +1,165 @@
+locality_std,district,province,latitude,longitude,coord_precision,coord_confidence,coord_uncertainty_km,site_type,raw_aliases
+Ahangama,Galle,Southern,5.973,80.365,locality,medium,2.0,beach / shoreline,"Ahangama beach,Ahangama | Arangala beach, Ahangama"
+Akkaraipattu,Ampara,Eastern,7.218,81.853,locality,medium,2.0,beach / shoreline,Akkarapattu
+Alankuda,Puttalam,North Western,8.07,79.712,locality,medium,2.0,beach / shoreline,"Alankuda beach,Kalpitiya | Alankudawa | Alankudawa Beach"
+Aluthgama,Kalutara,Western,6.433,79.998,locality,medium,2.0,beach / shoreline,"4th lane beach, Aluthgama | Aluthgama beach,Kalutara"
+Andimunai (Mundalama),Puttalam,North Western,7.79,79.785,locality,low,5.0,beach / shoreline,"Andimune | Andimune, Mundalama | Mundalama Aadimune | Mundalama, Adimune | Sellapuram, Adimune"
+Angulana,Colombo,Western,6.801,79.873,locality,medium,2.0,beach / shoreline,"Angulana beach | Angulana beach,Moratuwa | Angulana, Moratuwa"
+Arugam Bay,Ampara,Eastern,6.84,81.836,locality,medium,2.0,beach / shoreline,"Arugambe-Beach behind the STF camp | Pottuvil, Kottagala lagoon beach"
+Balapitiya,Galle,Southern,6.27,80.037,locality,medium,2.0,beach / shoreline,Balapitiya | Balapitiya beach
+Bambalapitiya,Colombo,Western,6.893,79.853,locality,high,1.0,beach / shoreline,"Bambalapitiya beach | Bambalapitiya beach, Colombo"
+Barudelpola (Mahawewa),Puttalam,North Western,7.47,79.812,locality,low,5.0,beach / shoreline,"Barudelpola | Barudepola beach, Mahawewa"
+Bathigama (Dikwella),Matara,Southern,5.96,80.682,locality,low,5.0,beach / shoreline,"Bathigama beach,Dikwella"
+Battalangunduwa Island,Puttalam,North Western,8.38,79.79,locality,low,5.0,beach / shoreline,Baththalangunduwa
+Bentara,Galle,Southern,6.408,80.002,locality,medium,2.0,beach / shoreline,"Bentara,near PM circuit bunglow"
+Bentota,Galle,Southern,6.42,79.998,locality,medium,2.0,beach / shoreline,"Beach behind the center for folk arts,Bentota | Bentota police station near beach"
+Beruwala,Kalutara,Western,6.478,79.983,locality,medium,2.0,beach / shoreline,"Beruwala beach, Beruwala | Beruwala beach,Kalutara"
+Beruwala Harbour,Kalutara,Western,6.474,79.981,locality,medium,2.0,harbour,"Beruwala small harbour, Beruwala"
+Blue Water (Wadduwa),Kalutara,Western,6.66,79.925,locality,medium,2.0,beach / shoreline,"Blue Water beach, Wadduwa | Panadura (panadura blue waters)"
+Browns Beach (Negombo),Gampaha,Western,7.215,79.838,locality,medium,2.0,beach / shoreline,"Browns beach,Negombo"
+Calido Beach (Kalutara),Kalutara,Western,6.578,79.957,locality,medium,2.0,beach / shoreline,"Calido beach | Calido beach, Kalutara | Calido beach,Kalutara | Kalutara calido beach | Kaluthara Calido beach | Navy camp,Calido beach,Kalutara"
+Chilaw,Puttalam,North Western,7.576,79.795,locality,medium,2.0,beach / shoreline,"Aluthwaththa, Chilaw"
+Colombo Port,Colombo,Western,6.945,79.848,locality,medium,2.0,harbour,"Harbour premises, Colombo"
+Dehiwala,Colombo,Western,6.851,79.862,locality,high,1.0,beach / shoreline,Dehiwala beach
+Delft (Neduntheevu),Jaffna,Northern,9.51,79.69,locality,medium,2.0,beach / shoreline,"Delft island | Nedinthivu west,Delft"
+Dikowita,Gampaha,Western,7.025,79.858,locality,medium,2.0,harbour,"Dikowita beach,Welisara | Dikowita harbour, Dikowita"
+Dodanduwa,Galle,Southern,6.097,80.127,locality,medium,2.0,beach / shoreline,"Dodanduwa beach,Hikkaduwa"
+Dombagahawatta (Pamunugama),Gampaha,Western,7.105,79.838,locality,low,3.0,beach / shoreline,Dobagahawatta beach
+Dungalpitiya,Gampaha,Western,7.163,79.827,locality,low,5.0,beach / shoreline,"Dungalpitiya KV Beach, Pitipana | Dungalpitiya beach | Dungalpitiya beach,Negombo"
+Duwe Modara (Kosgoda),Galle,Southern,6.345,80.024,locality,low,5.0,beach / shoreline,"Kosggoda duuwe modara beach | Kosgoda Duwe Modara, Kosgoda | Kosgoda duuwe modara beach"
+Egoda Uyana,Colombo,Western,6.738,79.893,locality,medium,2.0,beach / shoreline,"Egoda Uyana Beach,Panadura | Egoda Uyana beach, Moratuwa | Egoda Uyana, Moratuwa"
+Etthukala (Negombo),Gampaha,Western,7.238,79.836,locality,medium,2.0,beach / shoreline,"Aitthukala beach,Negombo"
+Galle (Mahamodara),Galle,Southern,6.04,80.208,locality,low,5.0,beach / shoreline,Galle ( near butterfly bridge)
+Galle Face,Colombo,Western,6.927,79.845,locality,high,1.0,beach / shoreline,Galle face beach | Galleface beach
+Gasthuna (Tangalle),Hambantota,Southern,6.03,80.82,locality,low,5.0,beach / shoreline,"Gasthuna,Tangalla"
+Ginthota,Galle,Southern,6.057,80.178,locality,medium,2.0,beach / shoreline,Ginthota ( near Amari Hotel) | Ginthota beach
+Hambantota,Hambantota,Southern,6.124,81.119,town,low,5.0,beach / shoreline,Hambantota
+Hambantota (town coast),Hambantota,Southern,6.118,81.105,locality,low,5.0,beach / shoreline,"Old Tangalle road beach,Hambantota"
+Hikkaduwa,Galle,Southern,6.139,80.1,locality,medium,2.0,beach / shoreline,Hikkaduwa beach
+Hikkaduwa National Park,Galle,Southern,6.138,80.102,locality,medium,2.0,beach / shoreline,Hikkaduwa National Park beach
+Hiriketiya,Matara,Southern,5.964,80.707,locality,medium,2.0,beach / shoreline,"Dikwella,Hiriketiya"
+Ichchankadu (Kandakuliya),Puttalam,North Western,8.17,79.7,locality,low,5.0,beach / shoreline,"Ichchankadu, KandaKuliya | Ichchankaduwa beach"
+Ilanthadiya (Kalpitiya),Puttalam,North Western,8.105,79.71,locality,low,5.0,beach / shoreline,"Ilanthadiya | Ilanthadiya beach, Kalpitiya | Ilanthadiya, Paniadiya | Ilanthadiya. Kalpitiya"
+Induruwa,Galle,Southern,6.38,80.015,locality,medium,2.0,beach / shoreline,"Induruwa | Induruwa Behind Pandanus Hotel | Induruwa Mahapalana | Induruwa beach | Induruwa beach(in front of the Kosgoda beach hotel) | Induruwa beach,Balapitiya | Induruwa, Mahapalena | Near Southern Star Hotel, Induruwa | Sea Rock Hotel, Podi Induruwa"
+Iranawila,Puttalam,North Western,7.51,79.805,locality,medium,2.0,beach / shoreline,"Iranawila beach, Chilaw | West Iranawila, Mahawewa"
+Kaikawala (Induruwa),Galle,Southern,6.395,80.008,locality,low,5.0,beach / shoreline,"Kaikawala beach, Induruwa"
+Kalmunai,Ampara,Eastern,7.413,81.827,locality,medium,2.0,beach / shoreline,Kalmuna
+Kalpitiya,Puttalam,North Western,8.23,79.76,locality,medium,2.0,offshore (floating),Floating in Kalpitiya sea
+Kalutara North,Kalutara,Western,6.598,79.951,locality,medium,2.0,beach / shoreline,Kalutara North beach | Kalutara north beach
+Kaluwamodara (Aluthgama),Kalutara,Western,6.42,80.001,locality,medium,2.0,beach / shoreline,"Kaluwamodara beach, Aluthgama"
+Kaluwanchikudy,Batticaloa,Eastern,7.53,81.785,locality,low,5.0,beach / shoreline,"Onthachchimadam beach, kaluwanchikuda"
+Kandakuliya,Puttalam,North Western,8.195,79.705,locality,medium,2.0,beach / shoreline,Nearby kandaguliya thotupala
+Karukupane (Chilaw),Puttalam,North Western,7.62,79.79,locality,low,5.0,beach / shoreline,"Karakupane, Chilaw"
+Kasakele (Kandakuliya),Puttalam,North Western,8.19,79.705,locality,low,5.0,beach / shoreline,"Kasakele Beach, Kandakuliya | Kasakele beach,Kandakuliya | Kasakele, Kalpitiya | Kasakele, Kandakuliya"
+Katukurunda,Kalutara,Western,6.565,79.963,locality,low,5.0,beach / shoreline,"Suduwella, Katukurunda"
+Kayts,Jaffna,Northern,9.693,79.86,locality,medium,2.0,beach / shoreline,"Kytes, Nerinchimunai"
+Kepungoda (Pamunugama),Gampaha,Western,7.12,79.836,locality,low,5.0,beach / shoreline,"Kapumgoda Beach | Kepumgoda Beach | Kepumgoda beach | Kepumgoda, Namguram varaya | Kepungoda Beach, Pamunugama | Kepungoda beach"
+Kirankulam,Batticaloa,Eastern,7.625,81.758,locality,low,5.0,beach / shoreline,"Kirankulam North, Manmunaipattu"
+Koggala,Galle,Southern,5.99,80.322,locality,medium,2.0,beach / shoreline,Koggala airforce camp beach
+Kollinjadiya (Wennappuwa),Puttalam,North Western,7.3508,79.8394,locality,medium,2.0,beach / shoreline,Western Kollinjadiya beach
+Kollupitiya,Colombo,Western,6.911,79.849,locality,high,1.0,beach / shoreline,Kollupitiya beach | Kollupitya beach
+Koralawella,Colombo,Western,6.76,79.885,locality,medium,2.0,beach / shoreline,Moratuwa Koralawella
+Kosgoda,Galle,Southern,6.333,80.027,locality,medium,2.0,beach / shoreline,"69 Km Post Cemetry beach, Kosgoda | Kosgoda | Kosgoda Gurukanda beach | Kosgoda Mahapalana, Kosgoda | Kosgoda beach | Kosgoda beach , Kosgoda | Victor Epa's Hatchery beach, Kosgoda"
+Kottegoda (Dikwella),Matara,Southern,5.951,80.66,locality,low,5.0,beach / shoreline,"Dikwella,Kottagoda, Lunukalapuwa beach | Kottegoda, Dikwella"
+Kudapaduwa (Negombo),Gampaha,Western,7.226,79.838,locality,medium,2.0,beach / shoreline,"Kudapaduwa beach, Negombo"
+Kudawa (Kalpitiya),Puttalam,North Western,8.28,79.73,locality,low,5.0,beach / shoreline,Kudawe beach | kudawa beach of kalpitiya
+Kudawella,Hambantota,Southern,5.997,80.755,locality,medium,2.0,beach / shoreline,"Kudawella, Matara"
+Kudiramalai Point,Puttalam,North Western,8.55,79.875,locality,low,5.0,beach / shoreline,kudiramale beach
+Kumana coast,Ampara,Eastern,6.56,81.735,locality,low,5.0,beach / shoreline,"Solamba, Kumana National Park"
+Kumarakanda (Dodanduwa),Galle,Southern,6.103,80.122,locality,low,5.0,beach / shoreline,"Kumarakanda beach, Dodanduwa"
+Kurusapaduwa (Chilaw),Puttalam,North Western,7.56,79.798,locality,low,5.0,beach / shoreline,"Kurusapaduwa | Kurusapaduwa beach,Chilaw | Rideewella, Kurusapaduwa"
+Lansigama (Marawila),Puttalam,North Western,7.42,79.82,locality,low,5.0,beach / shoreline,"Lansigama, Marawila | Wellamankare, Marawila"
+Lunawa,Colombo,Western,6.793,79.876,locality,medium,2.0,beach / shoreline,Moratuwa Lunawa beach
+Madampagama,Galle,Southern,6.305,80.03,locality,low,5.0,beach / shoreline,"Urawatta beach,Madampagama"
+Madiha,Matara,Southern,5.939,80.512,locality,low,5.0,beach / shoreline,Matara Madiha Beach
+Maggona,Kalutara,Western,6.513,79.98,locality,medium,2.0,beach / shoreline,"Maggona beach, Maggona"
+Mampuriya (Kalpitiya),Puttalam,North Western,8.125,79.7,locality,low,5.0,beach / shoreline,Mampuriya Beach
+Manelwatta (Gampaha coast),Gampaha,Western,7.08,79.845,locality,low,5.0,beach / shoreline,Manelwatta beach
+Mankadawala (Balapitiya),Galle,Southern,6.283,80.035,locality,low,5.0,beach / shoreline,"Mankadawala beach, Balapitiya"
+Mankerni,Batticaloa,Eastern,8.04,81.495,locality,low,5.0,beach / shoreline,"Wakare, Mankeeni south"
+Marawila,Puttalam,North Western,7.408,79.822,locality,medium,2.0,beach / shoreline,"Marawila beach | Marawila wella, Mahawewa"
+Marichchukkaddi,Mannar,Northern,8.585,79.94,locality,low,5.0,beach / shoreline,"Marichchiukattu, Karadikuli"
+Matara Fort,Matara,Southern,5.943,80.548,locality,medium,2.0,beach / shoreline,"Fort beach,Matara"
+Mattakkuliya (Crow Island),Colombo,Western,6.977,79.869,locality,medium,2.0,beach / shoreline,"Crow island beach,Mattakkuliya | Mattakkuliya (crow's island)"
+Midigama,Matara,Southern,5.964,80.388,locality,low,5.0,beach / shoreline,"Kadabaddegama beach,Midigama | Kadabaddewatta,Gurubawila beach,Midigama"
+Mirissa,Matara,Southern,5.946,80.458,locality,medium,2.0,beach / shoreline,Mirissa
+Mirissa Fishery Harbour,Matara,Southern,5.944,80.466,locality,medium,2.0,harbour,"Weligama,Mirissa fishery harbour"
+Modara (Mutwal),Colombo,Western,6.966,79.864,locality,medium,2.0,beach / shoreline,"Modara beach, Modara"
+Mohoththuwarama (Kalpitiya),Puttalam,North Western,8.21,79.718,locality,low,5.0,lagoon / island coast,Mohoththuwarama
+Moragalla (Beruwala),Kalutara,Western,6.452,79.988,locality,medium,2.0,beach / shoreline,"Aluthgama Moragollagama Beach | Aluthgama, Moragalla | Aluthgama,Moragalla beach | Earl reef hotel, Moragolla beach, Aluthgama | Moragalla beach in Beruwala ( Behind Cinnamon bay hotel) | Moragolla beach , Moragolla (near Cinnamon Bay Hotel) | Moragolla beach , Moragolla (near Golden Mine Hotel) | Moragolla beach(near to panaroma hotel)"
+Moratuwa,Colombo,Western,6.773,79.88,locality,medium,2.0,beach / shoreline,Moratuwa beach
+Moratuwella,Colombo,Western,6.778,79.878,locality,medium,2.0,beach / shoreline,"Moratuwella beach, Moratuwa | Moratuwella beach,Moratuwa"
+Mount Lavinia,Colombo,Western,6.839,79.863,locality,high,1.0,beach / shoreline,Beyond Mount Lavinia beach @dehiwala | Mount Lavenia beach | Mount Lavinea beach | Mount Lavinia | Mount Lavinia beach | Mount Levonia beach
+Moyawatta (Pamunugama),Gampaha,Western,7.085,79.842,locality,low,3.0,beach / shoreline,Moyawatta beach
+Muhudukaduwa (Naththandiya),Puttalam,North Western,7.39,79.825,locality,low,5.0,beach / shoreline,"Kudamaduwella, Mattakotuwella, Naththandiya | Muhudukaduwa, Naththandiya"
+Mundalama,Puttalam,North Western,7.8,79.795,locality,medium,2.0,beach / shoreline,"Mundalama beach,Mundalama | Mundalama, Mokkuthuduwawa"
+Muthupanthiya,Puttalam,North Western,7.7,79.8,locality,low,5.0,beach / shoreline,"Muthupanthiya | Muthupanthiya, Anawilundawa"
+Muttuwa (Wennappuwa),Puttalam,North Western,7.36,79.828,locality,low,5.0,beach / shoreline,"Muttuwa beach, Wennappuwa | Wennappuwa,Muttuwa"
+Nadukuda (Mannar Island),Mannar,Northern,9.04,79.79,locality,low,5.0,beach / shoreline,"Nadukkuda | Nadukkuda, Mannar | Nadukuda, Mannar"
+Nalluruwa (Panadura),Kalutara,Western,6.722,79.898,locality,medium,2.0,beach / shoreline,"Nalluruwa beach, Panadura"
+Nape (Kosgoda),Galle,Southern,6.3392,80.0333,locality,medium,2.0,beach / shoreline,"Habby Catch Beach, Naape"
+Narigama (Hikkaduwa),Galle,Southern,6.128,80.106,locality,medium,2.0,beach / shoreline,"Naarigama beach, Hikkaduwa | Narigama beach"
+Navaladi,Batticaloa,Eastern,7.738,81.708,locality,low,5.0,beach / shoreline,"Manmune North, Nawaladi"
+Negombo beach (Goldi Sands),Gampaha,Western,7.22,79.837,locality,medium,2.0,beach / shoreline,Behind the Negombo Goldi sand beach
+Nimalawa Sanctuary,Hambantota,Southern,6.215,81.335,locality,low,5.0,beach / shoreline,Nimalawa sanctuary
+Nirmalapura (Kalpitiya),Puttalam,North Western,8.15,79.715,locality,low,5.0,beach / shoreline,"Nirmalaoura, Daluwa | Nirmalapura beach, Kalpitiya | Nirmalapura, Kalpitiya"
+Okanda,Ampara,Eastern,6.656,81.777,locality,medium,2.0,beach / shoreline,"Lahugala, Panama, Okanda beach | Ranorugala, Okanda, Kumana"
+Oluthuduwai (Mannar),Mannar,Northern,8.99,79.867,locality,low,3.0,beach / shoreline,Oluthuduwawa
+Palangathure (Negombo),Gampaha,Western,7.25,79.835,locality,medium,2.0,beach / shoreline,"Palagathura beach,Negombo | Palagathuraya beach,Negombo"
+Palatupana,Hambantota,Southern,6.274,81.395,locality,low,5.0,beach / shoreline,Palatupaana
+Pamunugama,Gampaha,Western,7.092,79.841,locality,low,5.0,beach / shoreline,"Beach behind the Ceylon food pvt Ltd, Pamunugama, Negombo | Pamunugama beach | Pamunugama beach,Welisara | Sarakkukanda beach,Pamunugama"
+Panadura,Kalutara,Western,6.712,79.902,locality,medium,2.0,beach / shoreline,Panadura | Panadura Beach | Panadura beach
+Panama,Ampara,Eastern,6.762,81.823,locality,medium,2.0,beach / shoreline,Panama Pottuvil
+Panichankerni,Batticaloa,Eastern,8.075,81.47,locality,low,5.0,beach / shoreline,"Wakare, Panichchankeni Army camp area"
+Patabedimulla (Ambalangoda),Galle,Southern,6.24,80.05,locality,low,5.0,beach / shoreline,"Patabedimulla beach,Ambalangoda"
+Patuwatha (Hikkaduwa),Galle,Southern,6.145,80.097,locality,low,5.0,beach / shoreline,"Hikkaduwa Patuwatha beach, Hikkaduwa"
+Payagala,Kalutara,Western,6.532,79.976,locality,medium,2.0,beach / shoreline,"Beach near Payagala Janaprabodha mawatha | Ethagama beach/ Janaprabodha mawatha | Kalamulla beach, Payagala Beach | Kuda Payagala Beach, Payagala | Palapolawaththa beach, Payagala North | Payagala North | Payagala North beach (Payagala Maggona) | Payagala beach"
+Periyaneelavanai (Kalmunai North),Ampara,Eastern,7.445,81.815,locality,low,5.0,beach / shoreline,"Kalmuna North, Perianeelawani"
+Pitipana,Gampaha,Western,7.19,79.83,locality,low,5.0,beach / shoreline,Pitipana beach
+Pohoddaramulla,Kalutara,Western,6.64,79.933,locality,low,5.0,beach / shoreline,"Pahoddaramulla Kalutara North | Pohoddaramulla beach,Wadduwa"
+Polhena,Matara,Southern,5.934,80.518,locality,medium,2.0,beach / shoreline,"Paramulla Beach Polhena, Matara | Polhena beach,Matara | Polhena,Madiha beach"
+Pookulam (Puttalam),Puttalam,North Western,7.9072,79.8255,locality,low,3.0,lagoon / shoreline,Pookulam beach
+Poruthota (Negombo),Gampaha,Western,7.232,79.836,locality,medium,2.0,beach / shoreline,"Poruthota Beach | Poruthota beach, Negombo | Poruthota beach, Negombo (behind the Church) | Poruthota beach,Negombo | Poruthota beach,Palliyawatta,Negombo"
+Pothupitiya (Wadduwa),Kalutara,Western,6.69,79.91,locality,low,5.0,beach / shoreline,"Panadura Pothupitiya, near Thalima Hotel"
+Pottuvil,Ampara,Eastern,6.871,81.833,locality,medium,2.0,beach / shoreline,"P4 GN, Pottuvil"
+Preethipura (Wattala),Gampaha,Western,6.999,79.8674,locality,high,1.0,beach / shoreline,"Preethipura beach | Preethipura beach, Negombo"
+Punapitiya (Mundalama),Puttalam,North Western,7.825,79.785,locality,low,5.0,beach / shoreline,"Mundalama Punapitiya | Punapitiya beach,Mundalama | Punapitiya, Mundalama | Puunapitiya, Mundalama"
+Punkudutivu,Jaffna,Northern,9.585,79.822,locality,medium,2.0,beach / shoreline,"Punkudathive beach,Jaffna"
+Punnakudah,Batticaloa,Eastern,7.785,81.625,locality,low,5.0,beach / shoreline,"Erawurpaththu, Punnakuda"
+Puthukudiyiruppu (Batticaloa),Batticaloa,Eastern,7.615,81.765,locality,low,5.0,beach / shoreline,Puthukkuudiyiruppu. Manmunaipattiu
+Randombe (Ambalangoda),Galle,Southern,6.25,80.047,locality,low,5.0,beach / shoreline,Ambalangoda Randobe beach
+Ratmalana,Colombo,Western,6.82,79.869,locality,medium,2.0,beach / shoreline,"Alwis place, Ratmalana | Ratmalana Railway station | Ratmalana beach | Ratmalana beach, Ratmalana | Ratmalana, Angulana"
+Rekawa,Hambantota,Southern,6.044,80.846,locality,medium,2.0,beach / shoreline,"Rekawa,Gasthuna beach"
+Seenigama,Galle,Southern,6.162,80.09,locality,medium,2.0,beach / shoreline,"Seenigama beach,Hikkaduwa"
+Sethapaduwa (Pamunugama),Gampaha,Western,7.11,79.837,locality,medium,2.0,beach / shoreline,"Settapadu beach,Negombo | Settawatha beach,Negombo"
+Silamunai (Batticaloa),Batticaloa,Eastern,7.736,81.696,locality,medium,2.0,beach / shoreline,"Beach, Silamune"
+Sinnapadu (Mundalama),Puttalam,North Western,7.81,79.785,locality,low,5.0,beach / shoreline,"Mundalama Sinnapadu | Mundalama, Sinnapadu | Periyapaadu,Sinnapadu,Mundalama | Sinnapadu | Sinnapadu beach, | Sinnapadu beach, Mundalama"
+South Bar (Mannar),Mannar,Northern,8.968,79.905,locality,low,5.0,beach / shoreline,Southbar
+Suduwella (Chilaw),Puttalam,North Western,7.59,79.792,locality,low,5.0,beach / shoreline,"Chilaw Suduwella | Suduwella | Suduwella beach, Chilaw | Suduwella beach,Chilaw | Suduwella, Chilaw"
+Talawila (St Anne's),Puttalam,North Western,8.1,79.705,locality,medium,2.0,beach / shoreline,Beach behind the Thalawila church
+Thalahena,Gampaha,Western,7.18,79.828,locality,medium,2.0,beach / shoreline,"Basiyawatta beach,Negombo | Basiyawatta beach,Thalahena,Negombo | Thalahena Beach | Thalahena beach, Negombo | Thalahena beach,Negombo"
+Thalankudah,Batticaloa,Eastern,7.655,81.745,locality,low,5.0,beach / shoreline,"Thalankuda, Manmunaipattu"
+Thalpe,Galle,Southern,5.998,80.285,locality,medium,2.0,beach / shoreline,"Thalpe, Habaraduwa"
+Thalpitiya (Wadduwa),Kalutara,Western,6.665,79.923,locality,medium,2.0,beach / shoreline,"Panadura Thalapitiya beach | Thalpitiya Panadura | Thalpitiya beach, Wadduwa | Wadduwa Thalpitiya beach (near Laya beach hotel) | Wadduwa beach, Thalpitiya"
+Thalvupadu (Mannar),Mannar,Northern,8.9922,79.8862,locality,medium,2.0,beach / shoreline,Thalpadu
+Thalwila (Mahawewa),Puttalam,North Western,7.465,79.815,locality,low,5.0,beach / shoreline,"Thalawila, Barudelpola | Thalwila, Mahawewa"
+Thambattai,Ampara,Eastern,7.165,81.862,locality,low,5.0,beach / shoreline,Thambattei
+Thirukkovil,Ampara,Eastern,7.095,81.858,locality,low,5.0,beach / shoreline,"Akkarapattu Vinayagapuram beach,Thirukkovil,Akkarapattu | Vinaagapuram, Akkarapattu | Vinayagapuram beach,Thirukkovil,Akkarapattu"
+Thoduwawa,Puttalam,North Western,7.485,79.81,locality,low,5.0,beach / shoreline,"Mukkuthoduwawa beach,Kalpitiya | Thoduwawa. Mahawewa"
+Udappuwa,Puttalam,North Western,7.748,79.786,locality,medium,2.0,beach / shoreline,"Udappuwa | Udappuwa, Puttalam"
+Unawatuna,Galle,Southern,6.009,80.249,locality,high,1.0,beach / shoreline,Unawatuna
+Uswetakeiyawa,Gampaha,Western,7.042,79.853,locality,medium,2.0,beach / shoreline,"Thaldiyawatta beach,Uswetakeyyawa | Uswetakeyyawa beach"
+Uyankele (Panadura),Kalutara,Western,6.705,79.903,locality,medium,2.0,beach / shoreline,"Panadura uyankele beach | Uyankele beach, Panadura"
+Vakarai,Batticaloa,Eastern,8.15,81.43,locality,low,5.0,beach / shoreline,"Kajuwatta,Wakare"
+Valaipadu (Poonakary),Kilinochchi,Northern,9.47,80.08,locality,low,5.0,beach / shoreline,"KN76, Valaipaadu"
+Vankalai,Mannar,Northern,8.938,79.95,locality,low,5.0,beach / shoreline,Wankalaipadu
+Velanai,Jaffna,Northern,9.63,79.9,locality,low,5.0,beach / shoreline,Welanithurai beach-Jaffna | Welanithuraiu
+Wadduwa,Kalutara,Western,6.665,79.925,locality,medium,2.0,beach / shoreline,"Wadduwa beach | Wadduwa beach, near Sidhdhalepa Hotel"
+Walihena (Chilaw),Puttalam,North Western,7.605,79.79,locality,low,5.0,beach / shoreline,"Walihena beach, Chilaw"
+Warahena (Induruwa),Galle,Southern,6.385,80.012,locality,low,5.0,beach / shoreline,"Warahena beach,Induruwa"
+Waskaduwa,Kalutara,Western,6.628,79.94,locality,medium,2.0,beach / shoreline,"Waskaduwa beach,close to the Tangerin hotel"
+Weligama,Matara,Southern,5.973,80.429,locality,medium,2.0,beach / shoreline,Weligama
+Wellawatte,Colombo,Western,6.874,79.857,locality,high,1.0,beach / shoreline,Wallawththe Beach | Wellawathe | Wellawaththa beach | Wellawatta beach | Wellawatta beach (Near Kinross restuarant)
+Wellaweediya (Negombo),Gampaha,Western,7.205,79.84,locality,low,5.0,beach / shoreline,"Levis place, Senevirathna Mawatha, Wellaweediya, Negombo"
+Wennappuwa coast,Puttalam,North Western,7.35,79.83,locality,low,5.0,beach / shoreline,"Dummaladeniya | Kadawatha, Wennappuwa | Kammala, Wennappuwa | Ulhitiya, Wennappuwa"
+Yalegama (Balapitiya),Galle,Southern,6.37,80.018,locality,low,5.0,beach / shoreline,"Induruwa Yalegama beach | Yalegama beach,Balapitiya"

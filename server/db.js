@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { hashPassword } from './auth.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -24,7 +25,8 @@ let memoryData = {
   miis_incidents: [],
   miis_citizen_reports: [],
   miis_sources: [],
-  miis_rewards: []
+  miis_rewards: [],
+  miis_maritime_beacons: []
 };
 
 if (fs.existsSync(DATA_FILE)) {
@@ -43,7 +45,135 @@ export function initDatabase() {
   if (isNativeSqlite) {
     const schemaSql = fs.readFileSync(path.join(__dirname, 'schema.sql'), 'utf8');
     db.exec(schemaSql);
+    // Safe additive migration for existing SQLite files
+    try {
+      db.exec('ALTER TABLE miis_maritime_beacons ADD COLUMN reporter_user_id TEXT');
+    } catch {
+      // Column already exists
+    }
   }
+  seedDefaultPortalUsers();
+}
+
+export function seedDefaultPortalUsers() {
+  const defaults = [
+    {
+      user_id: 'USR-ADMIN-01',
+      email: 'admin@miis.lk',
+      full_name: 'Wanith Nirman',
+      organization: 'MIIS National Coordinator — University of Jaffna',
+      role: 'admin',
+      district: 'Jaffna',
+      password_hash: hashPassword('MiisAdmin#2026'),
+      verified_badge: 1,
+    },
+    {
+      user_id: 'USR-VAL-01',
+      email: 'validator@miis.lk',
+      full_name: 'Dr. Marine Conservation Validator',
+      organization: 'DWC / NARA Scientific Validation Unit',
+      role: 'validator',
+      district: 'Colombo',
+      password_hash: hashPassword('MiisValidator#2026'),
+      verified_badge: 1,
+    },
+    {
+      user_id: 'USR-REP-01',
+      email: 'reporter@miis.lk',
+      full_name: 'Negombo Coastal Fisher Observer',
+      organization: 'Western Fisheries Citizen-Science Network',
+      role: 'reporter',
+      district: 'Gampaha',
+      password_hash: hashPassword('MiisFisher#2026'),
+      verified_badge: 1,
+    },
+  ];
+
+  for (const u of defaults) {
+    if (!getUserByEmail(u.email)) {
+      createUser(u);
+    }
+  }
+}
+
+export function getUserByEmail(email) {
+  const norm = String(email || '').trim().toLowerCase();
+  if (isNativeSqlite) {
+    return db.prepare('SELECT * FROM miis_users WHERE lower(email) = ?').get(norm) || null;
+  }
+  return (memoryData.miis_users || []).find((u) => u.email.toLowerCase() === norm) || null;
+}
+
+export function getUserById(userId) {
+  if (isNativeSqlite) {
+    return db.prepare('SELECT user_id, email, full_name, organization, role, district, verified_badge, created_at FROM miis_users WHERE user_id = ?').get(userId) || null;
+  }
+  const u = (memoryData.miis_users || []).find((x) => x.user_id === userId);
+  if (!u) return null;
+  const { password_hash, ...safe } = u;
+  return safe;
+}
+
+export function createUser(user) {
+  const rec = { ...user, email: user.email.trim().toLowerCase() };
+  if (isNativeSqlite) {
+    db.prepare(`
+      INSERT INTO miis_users (user_id, email, full_name, organization, role, district, password_hash, verified_badge)
+      VALUES (@user_id, @email, @full_name, @organization, @role, @district, @password_hash, @verified_badge)
+    `).run(rec);
+  } else {
+    if (!memoryData.miis_users) memoryData.miis_users = [];
+    memoryData.miis_users.push(rec);
+    saveMemoryData();
+  }
+  const { password_hash, ...safe } = rec;
+  return safe;
+}
+
+export function logSecurityAudit({ user, action, resource, details = '', ip = '' }) {
+  const entry = {
+    log_id: `AUD-${Date.now()}-${Math.floor(100 + Math.random() * 900)}`,
+    user_id: user?.sub || user?.user_id || 'ANONYMOUS',
+    user_email: user?.email || 'public',
+    user_role: user?.role || 'public',
+    action,
+    resource,
+    details,
+    ip_address: ip || '',
+    created_at: new Date().toISOString(),
+  };
+  if (isNativeSqlite) {
+    db.prepare(`
+      INSERT INTO miis_access_audit_log (log_id, user_id, user_email, user_role, action, resource, details, ip_address, created_at)
+      VALUES (@log_id, @user_id, @user_email, @user_role, @action, @resource, @details, @ip_address, @created_at)
+    `).run(entry);
+  } else {
+    if (!memoryData.miis_access_audit_log) memoryData.miis_access_audit_log = [];
+    memoryData.miis_access_audit_log.unshift(entry);
+    saveMemoryData();
+  }
+  return entry;
+}
+
+export function getRecentAuditLogs(limit = 40) {
+  if (isNativeSqlite) {
+    return db.prepare('SELECT * FROM miis_access_audit_log ORDER BY created_at DESC LIMIT ?').all(limit);
+  }
+  return (memoryData.miis_access_audit_log || []).slice(0, limit);
+}
+
+export function getBeaconsByReporter(userId) {
+  if (isNativeSqlite) {
+    return db.prepare(`
+      SELECT client_uuid, incident_id, report_id, ingest_channel, observed_at, beacon_received_at,
+             latitude, longitude, gps_accuracy_m, maritime_zone, province, district, location_name,
+             event_type, taxon_group, condition_status, number_observed, beacon_status, media_status, exif_drift_km
+      FROM miis_maritime_beacons
+      WHERE reporter_user_id = ?
+      ORDER BY beacon_received_at DESC
+    `).all(userId);
+  }
+  return (memoryData.miis_maritime_beacons || []).filter((b) => b.reporter_user_id === userId);
 }
 
 export function clearDatabase() {
@@ -212,6 +342,97 @@ export function insertReward(reward) {
   } else {
     memoryData.miis_rewards.unshift(reward);
     saveMemoryData();
+  }
+}
+
+export function getBeaconByClientUuid(clientUuid) {
+  if (isNativeSqlite) {
+    return db.prepare('SELECT * FROM miis_maritime_beacons WHERE client_uuid = ?').get(clientUuid) || null;
+  }
+  const list = memoryData.miis_maritime_beacons || [];
+  return list.find(b => b.client_uuid === clientUuid) || null;
+}
+
+export function getAllMaritimeBeacons() {
+  if (isNativeSqlite) {
+    return db.prepare('SELECT client_uuid, incident_id, report_id, ingest_channel, observed_at, gps_locked_at, beacon_received_at, media_received_at, latitude, longitude, gps_accuracy_m, fix_quality, location_source, maritime_zone, distance_to_coast_km, province, district, location_name, event_type, taxon_group, condition_status, number_observed, reporter_role, vessel_id, beacon_status, media_status, exif_latitude, exif_longitude, exif_drift_km, photo_filename, photo_kb FROM miis_maritime_beacons ORDER BY beacon_received_at DESC').all();
+  }
+  return (memoryData.miis_maritime_beacons || []).map(({ photo_data_url, ...rest }) => rest);
+}
+
+export function insertMaritimeBeacon(beacon) {
+  const row = { reporter_user_id: null, ...beacon };
+  if (isNativeSqlite) {
+    const stmt = db.prepare(`
+      INSERT OR REPLACE INTO miis_maritime_beacons (
+        client_uuid, incident_id, report_id, ingest_channel, observed_at, gps_locked_at,
+        beacon_received_at, media_received_at, latitude, longitude, gps_accuracy_m,
+        fix_quality, location_source, maritime_zone, distance_to_coast_km, province, district,
+        location_name, event_type, taxon_group, condition_status, number_observed,
+        reporter_role, vessel_id, beacon_status, media_status, exif_latitude, exif_longitude,
+        exif_captured_at, exif_drift_km, photo_filename, photo_kb, photo_data_url, sms_packet, reporter_user_id
+      ) VALUES (
+        @client_uuid, @incident_id, @report_id, @ingest_channel, @observed_at, @gps_locked_at,
+        @beacon_received_at, @media_received_at, @latitude, @longitude, @gps_accuracy_m,
+        @fix_quality, @location_source, @maritime_zone, @distance_to_coast_km, @province, @district,
+        @location_name, @event_type, @taxon_group, @condition_status, @number_observed,
+        @reporter_role, @vessel_id, @beacon_status, @media_status, @exif_latitude, @exif_longitude,
+        @exif_captured_at, @exif_drift_km, @photo_filename, @photo_kb, @photo_data_url, @sms_packet, @reporter_user_id
+      )
+    `);
+    stmt.run(row);
+  } else {
+    if (!memoryData.miis_maritime_beacons) memoryData.miis_maritime_beacons = [];
+    const idx = memoryData.miis_maritime_beacons.findIndex(b => b.client_uuid === row.client_uuid);
+    if (idx >= 0) memoryData.miis_maritime_beacons[idx] = row;
+    else memoryData.miis_maritime_beacons.unshift(row);
+    saveMemoryData();
+  }
+  return row;
+}
+
+export function attachMediaToBeacon(clientUuid, mediaUpdate) {
+  if (isNativeSqlite) {
+    db.prepare(`
+      UPDATE miis_maritime_beacons
+      SET media_status = 'synced',
+          media_received_at = @media_received_at,
+          exif_latitude = @exif_latitude,
+          exif_longitude = @exif_longitude,
+          exif_captured_at = @exif_captured_at,
+          exif_drift_km = @exif_drift_km,
+          photo_filename = @photo_filename,
+          photo_kb = @photo_kb,
+          photo_data_url = @photo_data_url
+      WHERE client_uuid = @client_uuid
+    `).run({ client_uuid: clientUuid, ...mediaUpdate });
+
+    const beacon = getBeaconByClientUuid(clientUuid);
+    if (beacon?.report_id) {
+      db.prepare(`UPDATE miis_citizen_reports SET photo_urls = ? WHERE report_id = ?`)
+        .run(JSON.stringify([mediaUpdate.photo_filename || 'deferred_harbour_upload.jpg']), beacon.report_id);
+    }
+    if (beacon?.incident_id) {
+      const driftNote = mediaUpdate.exif_drift_km !== null && mediaUpdate.exif_drift_km > 0.5
+        ? ` [EXIF Drift Notice: photo GPS is ${mediaUpdate.exif_drift_km} km from beacon]`
+        : ' [Deferred Harbour Photo Verified & Attached]';
+      db.prepare(`UPDATE miis_incidents SET notes = COALESCE(notes, '') || ?, updated_at = CURRENT_TIMESTAMP WHERE incident_id = ?`)
+        .run(driftNote, beacon.incident_id);
+    }
+    return beacon;
+  } else {
+    if (!memoryData.miis_maritime_beacons) memoryData.miis_maritime_beacons = [];
+    const idx = memoryData.miis_maritime_beacons.findIndex(b => b.client_uuid === clientUuid);
+    if (idx >= 0) {
+      memoryData.miis_maritime_beacons[idx] = {
+        ...memoryData.miis_maritime_beacons[idx],
+        media_status: 'synced',
+        ...mediaUpdate
+      };
+      saveMemoryData();
+      return memoryData.miis_maritime_beacons[idx];
+    }
+    return null;
   }
 }
 

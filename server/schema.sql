@@ -113,3 +113,70 @@ CREATE TABLE IF NOT EXISTS miis_rewards (
   reason TEXT,
   awarded_at TEXT DEFAULT CURRENT_TIMESTAMP
 );
+
+-- Offshore Fisher Two-Phase Decoupled Maritime Sync Table
+-- Guarantees zero duplicate incidents on flaky sea-signal retries (client_uuid PK)
+-- and tracks Phase 1 (tiny GPS Geo-Beacon) independently from Phase 2 (deferred harbour photo)
+CREATE TABLE IF NOT EXISTS miis_maritime_beacons (
+  client_uuid TEXT PRIMARY KEY,
+  incident_id TEXT,
+  report_id TEXT,
+  ingest_channel TEXT DEFAULT 'http_beacon',
+  observed_at TEXT,
+  gps_locked_at TEXT,
+  beacon_received_at TEXT DEFAULT CURRENT_TIMESTAMP,
+  media_received_at TEXT,
+  latitude REAL,
+  longitude REAL,
+  gps_accuracy_m REAL,
+  fix_quality TEXT,
+  location_source TEXT,
+  maritime_zone TEXT,
+  distance_to_coast_km REAL,
+  province TEXT,
+  district TEXT,
+  location_name TEXT,
+  event_type TEXT,
+  taxon_group TEXT,
+  condition_status TEXT,
+  number_observed INTEGER DEFAULT 1,
+  reporter_role TEXT,
+  vessel_id TEXT,
+  beacon_status TEXT DEFAULT 'synced',
+  media_status TEXT DEFAULT 'none',
+  exif_latitude REAL,
+  exif_longitude REAL,
+  exif_captured_at TEXT,
+  exif_drift_km REAL,
+  photo_filename TEXT,
+  photo_kb INTEGER,
+  photo_data_url TEXT,
+  sms_packet TEXT,
+  reporter_user_id TEXT
+);
+
+-- Portal Users (Role-Based Access Control: reporter | validator | admin)
+CREATE TABLE IF NOT EXISTS miis_users (
+  user_id TEXT PRIMARY KEY,
+  email TEXT UNIQUE NOT NULL,
+  full_name TEXT NOT NULL,
+  organization TEXT,
+  role TEXT NOT NULL DEFAULT 'reporter',
+  district TEXT,
+  password_hash TEXT NOT NULL,
+  verified_badge BOOLEAN DEFAULT 0,
+  created_at TEXT DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Immutable Data Access & Validation Security Audit Log
+CREATE TABLE IF NOT EXISTS miis_access_audit_log (
+  log_id TEXT PRIMARY KEY,
+  user_id TEXT,
+  user_email TEXT,
+  user_role TEXT,
+  action TEXT NOT NULL,
+  resource TEXT NOT NULL,
+  details TEXT,
+  ip_address TEXT,
+  created_at TEXT DEFAULT CURRENT_TIMESTAMP
+);

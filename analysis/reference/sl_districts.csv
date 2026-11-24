@@ -1,0 +1,16 @@
+district,province,is_coastal,coast_sector,centroid_lat,centroid_lon,coastline_km,notes
+Colombo,Western,1,West Coast,6.850,79.865,40,Urbanized western coast; Kelani river to Bolgoda/Egoda Uyana
+Gampaha,Western,1,West Coast,7.130,79.835,45,Negombo lagoon; Pamunugama; Kepungoda; Wattala/Preethipura
+Kalutara,Western,1,Southwest Coast,6.550,79.965,42,Panadura to Bentota river north bank (Aluthgama/Moragalla)
+Puttalam,North Western,1,Northwest Coast,7.950,79.800,295,Wennappuwa; Chilaw; Mundalama; Kalpitiya Peninsula; Kudiramalai
+Mannar,Northern,1,Gulf of Mannar,8.980,79.900,196,Gulf of Mannar seagrass/dugong & turtle corridor; Mannar Island
+Kilinochchi,Northern,1,Northwest / Palk Bay,9.470,80.080,104,Poonakary / Valaipadu / Palk Bay coast
+Jaffna,Northern,1,Northern Peninsula & Islands,9.660,79.900,295,Jaffna Peninsula & offshore islands including Delft (Neduntheevu); Kayts; Velanai; Punkudutivu
+Mullaitivu,Northern,1,Northeast Coast,9.267,80.814,72,Northeast sandy coast (0 records in 2021-2026 ministry log - reporting gap)
+Trincomalee,Eastern,1,Northeast / East Coast,8.587,81.215,210,Deep submarine canyon & whale hotspot (0 records in 2021-2026 ministry log - reporting gap)
+Batticaloa,Eastern,1,East Coast,7.730,81.700,145,Vakarai; Punnakudah; Batticaloa lagoon; Manmunai; Kaluwanchikudy
+Ampara,Eastern,1,Southeast Coast,7.100,81.855,140,Kalmunai; Akkaraipattu; Thirukkovil; Pottuvil; Arugam Bay; Panama; Okanda; Kumana
+Hambantota,Southern,1,South / Southeast Coast,6.124,81.119,145,Kudawella; Tangalle; Rekawa turtle rookery; Hambantota; Nimalawa; Palatupana/Yala
+Matara,Southern,1,South Coast,5.948,80.548,55,Midigama; Weligama; Mirissa; Polhena; Madiha; Matara; Kottegoda; Dikwella; Hiriketiya
+Galle,Southern,1,Southwest Coast,6.150,80.100,73,Bentota south bank; Induruwa; Kosgoda; Balapitiya; Ambalangoda; Hikkaduwa; Galle; Unawatuna; Thalpe; Koggala; Ahangama
+Monaragala,Uva,0,Inland (Non-coastal),6.872,81.351,0,Landlocked Uva Province district; erroneous entry for Palatupana (Hambantota)

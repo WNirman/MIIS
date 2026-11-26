@@ -11,22 +11,79 @@ const IS_VERCEL = Boolean(process.env.VERCEL);
 let db = null;
 let isNativeSqlite = false;
 
-try {
-  const Database = (await import('better-sqlite3')).default;
+/**
+ * Wraps Node.js built-in `node:sqlite` (DatabaseSync, Node 22.5+ / 24 / 26+)
+ * to match the exact `.prepare(sql).run/get/all` API of `better-sqlite3`
+ * without requiring any C++ / node-gyp compilation on Vercel Linux!
+ */
+function wrapNodeSqlite(rawDb) {
+  return {
+    exec: (sql) => rawDb.exec(sql),
+    prepare: (sql) => {
+      const stmt = rawDb.prepare(sql);
+      stmt.setAllowBareNamedParameters(true);
+      const paramNames = [...new Set([...sql.matchAll(/@(\w+)/g)].map((m) => m[1]))];
+      const filterNamed = (arg) => {
+        if (!arg || typeof arg !== 'object' || Array.isArray(arg)) return arg;
+        const picked = {};
+        for (const k of paramNames) {
+          picked[k] = arg[k] === undefined ? null : arg[k];
+        }
+        return picked;
+      };
+      const normalizeRow = (row) => (row ? { ...row } : null);
+      return {
+        run: (...args) =>
+          paramNames.length && args.length === 1 && typeof args[0] === 'object'
+            ? stmt.run(filterNamed(args[0]))
+            : stmt.run(...args),
+        get: (...args) => {
+          const res =
+            paramNames.length && args.length === 1 && typeof args[0] === 'object'
+              ? stmt.get(filterNamed(args[0]))
+              : stmt.get(...args);
+          return normalizeRow(res);
+        },
+        all: (...args) => {
+          const rows =
+            paramNames.length && args.length === 1 && typeof args[0] === 'object'
+              ? stmt.all(filterNamed(args[0]))
+              : stmt.all(...args);
+          return rows.map((r) => ({ ...r }));
+        },
+      };
+    },
+  };
+}
+
+function resolveActiveDbPath() {
   const bundledDbPath = path.join(__dirname, 'miis.db');
-  let activeDbPath = bundledDbPath;
-  if (IS_VERCEL) {
-    // Vercel serverless filesystem is read-only outside /tmp; copy bundled SQLite DB to /tmp
-    activeDbPath = path.join(os.tmpdir(), 'miis.db');
-    if (!fs.existsSync(activeDbPath) && fs.existsSync(bundledDbPath)) {
-      fs.copyFileSync(bundledDbPath, activeDbPath);
-    }
+  if (!IS_VERCEL) return bundledDbPath;
+  const tmpDbPath = path.join(os.tmpdir(), 'miis.db');
+  if (!fs.existsSync(tmpDbPath) && fs.existsSync(bundledDbPath)) {
+    fs.copyFileSync(bundledDbPath, tmpDbPath);
   }
-  db = new Database(activeDbPath);
+  return tmpDbPath;
+}
+
+try {
+  // 1. Prefer Node's zero-compile built-in `node:sqlite` (Node 22.5+, 24, 26 on Vercel!)
+  const { DatabaseSync } = await import('node:sqlite');
+  const activeDbPath = resolveActiveDbPath();
+  db = wrapNodeSqlite(new DatabaseSync(activeDbPath));
   isNativeSqlite = true;
-  console.log('[MIIS DB] Connected to SQLite database:', activeDbPath);
-} catch (err) {
-  console.warn('[MIIS DB] SQLite native module unavailable. Operating in lightweight file-backed database mode.', err.message);
+  console.log('[MIIS DB] Connected via built-in node:sqlite:', activeDbPath);
+} catch {
+  try {
+    // 2. Optional fallback to `better-sqlite3` if running on older Node 18/20
+    const Database = (await import('better-sqlite3')).default;
+    const activeDbPath = resolveActiveDbPath();
+    db = new Database(activeDbPath);
+    isNativeSqlite = true;
+    console.log('[MIIS DB] Connected via better-sqlite3:', activeDbPath);
+  } catch (err) {
+    console.warn('[MIIS DB] Operating in lightweight file-backed database mode.', err.message);
+  }
 }
 
 // In-Memory / File-backed Fallback DB Store when native SQLite isn't compiled (e.g. serverless Linux)

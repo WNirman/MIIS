@@ -955,9 +955,13 @@ app.get('/api/stats', requireRole('validator', 'admin'), (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`=======================================================`);
-  console.log(` MIIS Backend REST API Server listening on port ${PORT}`);
-  console.log(` Sri Lanka Marine Conservation Authority Harvester Active`);
-  console.log(`=======================================================`);
-});
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`=======================================================`);
+    console.log(` MIIS Backend REST API Server listening on port ${PORT}`);
+    console.log(` Sri Lanka Marine Conservation Authority Harvester Active`);
+    console.log(`=======================================================`);
+  });
+}
+
+export default app;

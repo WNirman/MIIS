@@ -1,0 +1,21 @@
+# Dependencies (never commit Windows node_modules — breaks Linux/Vercel builds with Exit 126)
+node_modules/
+mobile_flutter/.dart_tool/
+mobile_flutter/build/
+mobile_flutter/.flutter-plugins
+mobile_flutter/.flutter-plugins-dependencies
+
+# Build outputs
+dist/
+.vercel/
+
+# Secrets & local environment variables
+.env
+.env.*
+!.env.example
+
+# Logs & OS files
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db

@@ -1,44 +1,75 @@
 import fs from 'fs';
+import os from 'os';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { hashPassword } from './auth.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const IS_VERCEL = Boolean(process.env.VERCEL);
 
 let db = null;
 let isNativeSqlite = false;
 
 try {
   const Database = (await import('better-sqlite3')).default;
-  const dbPath = path.join(__dirname, 'miis.db');
-  db = new Database(dbPath);
+  const bundledDbPath = path.join(__dirname, 'miis.db');
+  let activeDbPath = bundledDbPath;
+  if (IS_VERCEL) {
+    // Vercel serverless filesystem is read-only outside /tmp; copy bundled SQLite DB to /tmp
+    activeDbPath = path.join(os.tmpdir(), 'miis.db');
+    if (!fs.existsSync(activeDbPath) && fs.existsSync(bundledDbPath)) {
+      fs.copyFileSync(bundledDbPath, activeDbPath);
+    }
+  }
+  db = new Database(activeDbPath);
   isNativeSqlite = true;
-  console.log('[MIIS DB] Connected to SQLite database:', dbPath);
+  console.log('[MIIS DB] Connected to SQLite database:', activeDbPath);
 } catch (err) {
   console.warn('[MIIS DB] SQLite native module unavailable. Operating in lightweight file-backed database mode.', err.message);
 }
 
-// In-Memory / File-backed Fallback DB Store if SQLite driver isn't precompiled
-const DATA_FILE = path.join(__dirname, 'db_data.json');
+// In-Memory / File-backed Fallback DB Store when native SQLite isn't compiled (e.g. serverless Linux)
+const DATA_FILE = IS_VERCEL
+  ? path.join(os.tmpdir(), 'miis_db_data.json')
+  : path.join(__dirname, 'db_data.json');
+
 let memoryData = {
   miis_incidents: [],
   miis_citizen_reports: [],
   miis_sources: [],
   miis_rewards: [],
-  miis_maritime_beacons: []
+  miis_maritime_beacons: [],
+  miis_users: [],
+  miis_access_audit_log: [],
 };
 
 if (fs.existsSync(DATA_FILE)) {
   try {
-    memoryData = JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'));
+    memoryData = { ...memoryData, ...JSON.parse(fs.readFileSync(DATA_FILE, 'utf8')) };
   } catch (e) {
     console.error('Error loading fallback db data:', e);
+  }
+} else if (!isNativeSqlite) {
+  // Seed initial verified incidents & sources from JSON when running in fallback mode
+  try {
+    const seedJsonPath = path.join(__dirname, '..', 'src', 'data', 'real_incidents_data.json');
+    if (fs.existsSync(seedJsonPath)) {
+      const seed = JSON.parse(fs.readFileSync(seedJsonPath, 'utf8'));
+      memoryData.miis_incidents = seed.incidents || [];
+      memoryData.miis_sources = seed.sources || [];
+    }
+  } catch {
+    // Ignore optional seed error
   }
 }
 
 function saveMemoryData() {
-  fs.writeFileSync(DATA_FILE, JSON.stringify(memoryData, null, 2), 'utf8');
+  try {
+    fs.writeFileSync(DATA_FILE, JSON.stringify(memoryData, null, 2), 'utf8');
+  } catch {
+    // Keep operating in-memory if filesystem is read-only
+  }
 }
 
 export function initDatabase() {

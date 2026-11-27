@@ -123,8 +123,26 @@ class QueuedMaritimeReport {
 
 class OfflineSyncService {
   static const _queueKey = 'miis_flutter_sea_queue_v1';
-  static const _serverUrlKey = 'miis_flutter_server_url_v1';
-  static String get defaultServerUrl => kIsWeb ? 'http://localhost:5000' : 'http://172.26.102.34:5000';
+  static const _serverUrlKey = 'miis_flutter_server_url_v2';
+
+  /// Bearer token of the signed-in user (null = anonymous reporting, which is always allowed).
+  static String? authToken;
+
+  static Map<String, String> _headers() => {
+        'Content-Type': 'application/json',
+        if (authToken != null) 'Authorization': 'Bearer $authToken',
+      };
+
+  /// Web build: talk to the backend on the same host that served the app (phone-on-Wi-Fi friendly).
+  /// Native build: set the server once in Menu → Server (defaults to the Android emulator host).
+  static String get defaultServerUrl {
+    if (kIsWeb) {
+      final b = Uri.base;
+      if (b.scheme == 'https') return b.origin; // deployed (e.g. Vercel) — same origin
+      return 'http://${b.host}:5000';
+    }
+    return 'http://10.0.2.2:5000';
+  }
 
   static String generateUuid() {
     final rng = Random.secure();
@@ -135,6 +153,14 @@ class OfflineSyncService {
   static Future<String> getServerUrl() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getString(_serverUrlKey) ?? defaultServerUrl;
+  }
+
+  /// URL of the MIIS website (same host as the API; port 3000 in local dev, same origin when deployed).
+  static Future<String> getWebsiteUrl() async {
+    final server = await getServerUrl();
+    final uri = Uri.parse(server);
+    if (uri.scheme == 'https') return uri.origin;
+    return '${uri.scheme}://${uri.host}:3000';
   }
 
   static Future<void> setServerUrl(String url) async {
@@ -204,7 +230,7 @@ class OfflineSyncService {
       final resp = await http
           .post(
             Uri.parse('$baseUrl/api/reports/beacon'),
-            headers: {'Content-Type': 'application/json'},
+            headers: _headers(),
             body: jsonEncode(payload),
           )
           .timeout(const Duration(seconds: 8));
@@ -238,7 +264,7 @@ class OfflineSyncService {
       final resp = await http
           .post(
             Uri.parse('$baseUrl/api/reports/${report.clientUuid}/media'),
-            headers: {'Content-Type': 'application/json'},
+            headers: _headers(),
             body: jsonEncode({
               'client_uuid': report.clientUuid,
               'photo_data_url': 'data:image/jpeg;base64,${report.photoBase64}',
@@ -260,6 +286,28 @@ class OfflineSyncService {
       return false;
     } catch (_) {
       return false;
+    }
+  }
+
+  /// Sightings from the server.
+  /// - Registered reporter  → /api/portal/my-reports (own reports only)
+  /// - Validator / Admin    → /api/incidents (all verified records; confidential for everyone else)
+  /// Returns null when unauthorised (token expired) so the UI can fall back to on-device reports.
+  static Future<List<Map<String, dynamic>>?> fetchServerSightings({required bool validator}) async {
+    if (authToken == null) return [];
+    final baseUrl = await getServerUrl();
+    try {
+      final path = validator ? '/api/incidents' : '/api/portal/my-reports';
+      final resp = await http
+          .get(Uri.parse('$baseUrl$path'), headers: _headers())
+          .timeout(const Duration(seconds: 12));
+      if (resp.statusCode == 401 || resp.statusCode == 403) return null;
+      if (resp.statusCode != 200) return [];
+      final data = jsonDecode(resp.body);
+      if (data['success'] != true || data['confidential_locked'] == true) return [];
+      return (data['data'] as List).map((e) => Map<String, dynamic>.from(e as Map)).toList();
+    } catch (_) {
+      return [];
     }
   }
 

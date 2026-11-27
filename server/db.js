@@ -58,6 +58,14 @@ function wrapNodeSqlite(rawDb) {
 
 function resolveActiveDbPath() {
   const bundledDbPath = path.join(__dirname, 'miis.db');
+  if (process.env.MIIS_DB_PATH) {
+    const customPath = process.env.MIIS_DB_PATH;
+    if (!fs.existsSync(customPath) && fs.existsSync(bundledDbPath)) {
+      fs.mkdirSync(path.dirname(customPath), { recursive: true });
+      fs.copyFileSync(bundledDbPath, customPath);
+    }
+    return customPath;
+  }
   if (!IS_VERCEL) return bundledDbPath;
   const tmpDbPath = path.join(os.tmpdir(), 'miis.db');
   if (!fs.existsSync(tmpDbPath) && fs.existsSync(bundledDbPath)) {

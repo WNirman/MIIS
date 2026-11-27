@@ -3,9 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../data/constants.dart';
 import '../services/maritime_geo.dart';
 import '../services/offline_sync_service.dart';
+import '../state/app_scope.dart';
+import '../theme/miis_theme.dart';
+import '../widgets/miis_widgets.dart';
+import 'join_screen.dart';
 
+/// Offline-first, trilingual, zero-login incident reporter aligned to the MIIS web palette.
 class QuickReportScreen extends StatefulWidget {
   final VoidCallback onQueueUpdated;
   const QuickReportScreen({super.key, required this.onQueueUpdated});
@@ -29,7 +35,7 @@ class _QuickReportScreenState extends State<QuickReportScreen> {
   int _count = 1;
   bool _netHazard = true;
   bool _oilHazard = false;
-  bool _plasticHazard = false;
+  final bool _plasticHazard = false;
   final _notesCtrl = TextEditingController();
 
   String? _photoBase64;
@@ -38,31 +44,61 @@ class _QuickReportScreenState extends State<QuickReportScreen> {
   QueuedMaritimeReport? _lastReceipt;
 
   static const _taxa = [
-    ('Sea turtle', '🐢', 'Turtle'),
-    ('Dolphin', '🐬', 'Dolphin'),
-    ('Whale', '🐋', 'Whale'),
-    ('Dugong', '🦭', 'Dugong'),
-    ('Fish', '🐟', 'Fish Kill'),
-    ('Not animal-related', '🛢️', 'Oil / Net'),
+    ('Sea turtle', '🐢', 'tax.turtle'),
+    ('Dolphin', '🐬', 'tax.dolphin'),
+    ('Whale', '🐋', 'tax.whale'),
+    ('Dugong', '🦭', 'tax.dugong'),
+    ('Fish', '🐟', 'tax.fish'),
+    ('Not animal-related', '🛢️', 'tax.pollution'),
   ];
 
   static const _events = [
-    'Live stranded animal',
-    'Entangled animal',
-    'Dead animal',
-    'Injured animal',
-    'Oil pollution',
-    'Ghost net',
+    ('Live stranded animal', 'ev.liveStranded'),
+    ('Entangled animal', 'ev.entangled'),
+    ('Dead animal', 'ev.dead'),
+    ('Injured animal', 'ev.injured'),
+    ('Oil pollution', 'ev.oil'),
+    ('Ghost net', 'ev.ghost'),
   ];
 
-  static const _conditions = ['Alive', 'Entangled', 'Injured', 'Dead'];
+  static const _conditions = [
+    ('Alive', 'cond.alive'),
+    ('Entangled', 'cond.entangled'),
+    ('Injured', 'cond.injured'),
+    ('Dead', 'cond.dead'),
+  ];
+
+  static const _quickKeys = [
+    'rep.quick1',
+    'rep.quick2',
+    'rep.quick3',
+    'rep.quick4',
+    'rep.quick5',
+  ];
+
+  @override
+  void dispose() {
+    _notesCtrl.dispose();
+    super.dispose();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final pre = context.app.takePrefill();
+    if (pre != null && pre.isNotEmpty) {
+      _taxon = pre;
+      _lastReceipt = null;
+    }
+  }
 
   Future<void> _lockSatelliteGps() async {
+    final app = context.app;
     setState(() => _lockingGps = true);
     try {
       final serviceOn = await Geolocator.isLocationServiceEnabled();
       if (!serviceOn) {
-        _showSnack('Turn on phone GPS / Location in settings (works offline at sea!).');
+        _showSnack(app.t('rep.gpsOff'));
         return;
       }
       var perm = await Geolocator.checkPermission();
@@ -70,10 +106,9 @@ class _QuickReportScreenState extends State<QuickReportScreen> {
         perm = await Geolocator.requestPermission();
       }
       if (perm == LocationPermission.denied || perm == LocationPermission.deniedForever) {
-        _showSnack('GPS permission required to lock exact sea coordinates.');
+        _showSnack(app.t('rep.gpsPerm'));
         return;
       }
-
       final pos = await Geolocator.getCurrentPosition(
         locationSettings: const LocationSettings(
           accuracy: LocationAccuracy.bestForNavigation,
@@ -86,9 +121,9 @@ class _QuickReportScreenState extends State<QuickReportScreen> {
         _accM = pos.accuracy;
         _gpsLockedAt = DateTime.now().toUtc();
       });
-      _showSnack('Satellite GPS locked (±${pos.accuracy.round()} m)');
-    } catch (e) {
-      _showSnack('GPS fix timeout — step onto open deck & retry.');
+      _showSnack('${app.t('rep.gpsLocked')} (±${pos.accuracy.round()} m)');
+    } catch (_) {
+      _showSnack(app.t('rep.gpsTimeout'));
     } finally {
       if (mounted) setState(() => _lockingGps = false);
     }
@@ -108,6 +143,12 @@ class _QuickReportScreenState extends State<QuickReportScreen> {
       _photoName = xfile.name;
       _photoKb = (bytes.length / 1024).round();
     });
+  }
+
+  void _appendNote(String chip) {
+    final cur = _notesCtrl.text.trim();
+    if (cur.contains(chip)) return;
+    _notesCtrl.text = cur.isEmpty ? chip : '$cur; $chip';
   }
 
   Future<void> _submitReport() async {
@@ -161,18 +202,14 @@ class _QuickReportScreenState extends State<QuickReportScreen> {
       mediaStatus: _photoBase64 != null ? 'deferred_for_harbour' : 'none',
     );
 
-    // 1. Always persist offline first so sea sighting is NEVER lost
     await OfflineSyncService.upsertReport(report);
-
-    // 2. Phase 1: Send tiny <500 B Geo-Beacon immediately
     final beaconOk = await OfflineSyncService.syncBeaconPhase(report);
-
-    // 3. Phase 2: Send photo now only if user unchecked "Hold photo for harbour"
     if (beaconOk && report.photoBase64 != null && !_deferPhotoForHarbour) {
       await OfflineSyncService.syncMediaPhase(report);
     }
 
     widget.onQueueUpdated();
+    if (!mounted) return;
     setState(() {
       _lastReceipt = report;
       _photoBase64 = null;
@@ -184,11 +221,11 @@ class _QuickReportScreenState extends State<QuickReportScreen> {
   }
 
   Future<void> _launchSmsFallback(String packet) async {
-    final uri = Uri(scheme: 'sms', path: '+94112888555', queryParameters: {'body': packet});
+    final uri = Uri(scheme: 'sms', path: kSmsGateway, queryParameters: {'body': packet});
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri);
     } else {
-      _showSnack('SMS app unavailable. Packet copied in Outbox.');
+      _showSnack('SMS app unavailable. Packet saved in Outbox.');
     }
   }
 
@@ -199,89 +236,74 @@ class _QuickReportScreenState extends State<QuickReportScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final app = context.app;
     final geo = MaritimeGeoService.validateSriLankaCoords(_lat, _lon);
 
     if (_lastReceipt != null) {
       final r = _lastReceipt!;
+      final synced = r.beaconStatus == 'synced';
       return ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          Card(
-            color: const Color(0xFF0E233A),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
-              side: const BorderSide(color: Color(0xFF10B981), width: 1.5),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      const Icon(Icons.check_circle, color: Color(0xFF10B981), size: 36),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: Text(
-                          r.beaconStatus == 'synced'
-                              ? 'GPS Geo-Beacon Sent!'
-                              : 'Saved Safely Offline!',
-                          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 12),
-                  Text(
-                    r.beaconStatus == 'synced'
-                        ? 'Ref: ${r.serverIncidentId}\n${r.district} (${r.province}) • ${r.latitude.toStringAsFixed(5)}, ${r.longitude.toStringAsFixed(5)}'
-                        : 'No internet detected. Your GPS & timestamp are saved locally and can be sent right now via 2G SMS.',
-                    style: const TextStyle(color: Colors.white70, height: 1.4),
-                  ),
-                  if (r.mediaStatus == 'deferred_for_harbour') ...[
-                    const SizedBox(height: 12),
-                    Container(
-                      padding: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF2E1A47),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
+          MiisCard(
+            borderColor: synced ? MiisColors.emerald : MiisColors.amber,
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Icon(
+                      synced ? Icons.check_circle : Icons.offline_pin,
+                      color: synced ? MiisColors.emerald : MiisColors.amber,
+                      size: 36,
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
                       child: Text(
-                        'Photo (${r.photoKb} KB) is held safely on-device. Open the Outbox tab at harbour Wi-Fi/4G to upload.',
-                        style: const TextStyle(color: Color(0xFFD8B4FE), fontSize: 12),
+                        synced ? app.t('rep.sent') : app.t('rep.saved'),
+                        style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
                       ),
                     ),
                   ],
-                  const SizedBox(height: 16),
-                  if (r.beaconStatus != 'synced')
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton.icon(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFFF59E0B),
-                          foregroundColor: Colors.black,
-                          padding: const EdgeInsets.symmetric(vertical: 14),
-                        ),
-                        onPressed: () => _launchSmsFallback(r.smsPacket),
-                        icon: const Icon(Icons.sms),
-                        label: Text('Send 2G SMS Beacon (${r.smsPacket.length} chars)'),
-                      ),
+                ),
+                const SizedBox(height: 12),
+                Text(
+                  synced
+                      ? '${app.t('rep.ref')}: ${r.serverIncidentId}\n${r.district} (${r.province}) • ${r.latitude.toStringAsFixed(5)}, ${r.longitude.toStringAsFixed(5)}'
+                      : app.t('rep.savedSub'),
+                  style: const TextStyle(color: MiisColors.muted, height: 1.45),
+                ),
+                if (r.mediaStatus == 'deferred_for_harbour') ...[
+                  const SizedBox(height: 12),
+                  Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: MiisColors.bg,
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: MiisColors.line),
                     ),
-                  const SizedBox(height: 10),
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF22D3EE),
-                        foregroundColor: Colors.black,
-                        padding: const EdgeInsets.symmetric(vertical: 14),
-                      ),
-                      onPressed: () => setState(() => _lastReceipt = null),
-                      child: const Text('Report Another Incident', style: TextStyle(fontWeight: FontWeight.w800)),
+                    child: Text(
+                      '${app.t('rep.photoHeld')} (${r.photoKb ?? 0} KB)',
+                      style: const TextStyle(color: MiisColors.amberSoft, fontSize: 12.5),
                     ),
                   ),
                 ],
-              ),
+                const SizedBox(height: 18),
+                if (!synced) ...[
+                  MiisButton(
+                    label: '${app.t('rep.sms')} (${r.smsPacket.length})',
+                    icon: Icons.sms_outlined,
+                    onPressed: () => _launchSmsFallback(r.smsPacket),
+                  ),
+                  const SizedBox(height: 10),
+                ],
+                MiisButton(
+                  label: app.t('rep.another'),
+                  outlined: !synced,
+                  onPressed: () => setState(() => _lastReceipt = null),
+                ),
+              ],
             ),
           ),
         ],
@@ -289,91 +311,113 @@ class _QuickReportScreenState extends State<QuickReportScreen> {
     }
 
     return ListView(
-      padding: const EdgeInsets.fromLTRB(14, 12, 14, 24),
+      padding: const EdgeInsets.fromLTRB(16, 12, 16, 28),
       children: [
-        // 1. SATELLITE GPS LOCK CARD
-        Card(
-          color: const Color(0xFF0D2036),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(18),
-            side: BorderSide(color: geo.valid ? const Color(0xFF14B8A6) : Colors.redAccent),
+        // Guided language bar + safety notice
+        MiisCard(
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+          child: Row(
+            children: [
+              const Icon(Icons.language, size: 18, color: MiisColors.amber),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Text(app.t('rep.guided'),
+                    style: const TextStyle(fontSize: 12.5, fontWeight: FontWeight.w700)),
+              ),
+              const LanguageChips(),
+            ],
           ),
-          child: Padding(
-            padding: const EdgeInsets.all(14),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    const Icon(Icons.satellite_alt, color: Color(0xFF22D3EE), size: 20),
-                    const SizedBox(width: 8),
-                    const Expanded(
-                      child: Text(
-                        '1. Lock Sea / Beach GPS (Offline OK)',
-                        style: TextStyle(fontWeight: FontWeight.w800, fontSize: 15),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 10),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton.icon(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF22D3EE),
-                      foregroundColor: Colors.black,
-                      padding: const EdgeInsets.symmetric(vertical: 14),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-                    ),
-                    onPressed: _lockingGps ? null : _lockSatelliteGps,
-                    icon: const Icon(Icons.my_location),
-                    label: Text(
-                      _lockingGps ? 'LOCKING SATELLITES...' : 'DROP GPS PIN NOW',
-                      style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 15),
-                    ),
+        ),
+        const SizedBox(height: 8),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 4),
+          child: Text(app.t('rep.safety'),
+              style: const TextStyle(fontSize: 12, color: MiisColors.muted, height: 1.35)),
+        ),
+        const SizedBox(height: 14),
+
+        // 1. SATELLITE GPS CARD
+        MiisCard(
+          borderColor: geo.valid ? MiisColors.line : Colors.redAccent,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  const Icon(Icons.satellite_alt, color: MiisColors.amber, size: 20),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(app.t('rep.step1'),
+                        style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 15.5)),
                   ),
-                ),
-                const SizedBox(height: 10),
-                Text(
-                  '${_lat.toStringAsFixed(5)}°N, ${_lon.toStringAsFixed(5)}°E • ${MaritimeGeoService.accuracyLabel(_accM)}',
-                  style: const TextStyle(fontFamily: 'monospace', fontSize: 12, color: Color(0xFF5EEAD4)),
-                ),
-                const SizedBox(height: 4),
-                Text(geo.message, style: const TextStyle(fontSize: 12, color: Colors.white70)),
-              ],
-            ),
+                ],
+              ),
+              const SizedBox(height: 6),
+              Text(app.t('rep.step1Help'),
+                  style: const TextStyle(fontSize: 12.5, color: MiisColors.muted, height: 1.4)),
+              const SizedBox(height: 12),
+              MiisButton(
+                label: _lockingGps ? app.t('rep.locking') : app.t('rep.lock'),
+                icon: Icons.my_location,
+                dense: true,
+                onPressed: _lockingGps ? null : _lockSatelliteGps,
+              ),
+              const SizedBox(height: 10),
+              Text(
+                '${_lat.toStringAsFixed(5)}°N, ${_lon.toStringAsFixed(5)}°E • ${MaritimeGeoService.accuracyLabel(_accM)}',
+                style: const TextStyle(fontFamily: 'monospace', fontSize: 12, color: MiisColors.teal),
+              ),
+              const SizedBox(height: 3),
+              Text(geo.message, style: const TextStyle(fontSize: 12, color: MiisColors.muted)),
+            ],
           ),
         ),
 
-        const SizedBox(height: 12),
+        const SizedBox(height: 16),
 
-        // 2. ANIMAL & INCIDENT BIG TAP GRID
-        const Text('2. What Did You See?', style: TextStyle(fontWeight: FontWeight.w800, fontSize: 15)),
-        const SizedBox(height: 8),
+        // 2. OBSERVATION SELECTION
+        Text(app.t('rep.step2'), style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 15.5)),
+        const SizedBox(height: 4),
+        Text(app.t('rep.step2Help'), style: const TextStyle(fontSize: 12.5, color: MiisColors.muted)),
+        const SizedBox(height: 10),
         GridView.count(
           crossAxisCount: 3,
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           mainAxisSpacing: 8,
           crossAxisSpacing: 8,
-          childAspectRatio: 1.25,
+          childAspectRatio: 1.15,
           children: _taxa.map((item) {
             final selected = _taxon == item.$1;
             return InkWell(
               onTap: () => setState(() => _taxon = item.$1),
               borderRadius: BorderRadius.circular(14),
               child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 4),
                 decoration: BoxDecoration(
-                  color: selected ? const Color(0xFF134E4A) : const Color(0xFF0D2036),
+                  color: selected ? MiisColors.amber.withValues(alpha: 0.16) : MiisColors.panel,
                   borderRadius: BorderRadius.circular(14),
-                  border: Border.all(color: selected ? const Color(0xFF2DD4BF) : Colors.white12, width: 1.5),
+                  border: Border.all(
+                    color: selected ? MiisColors.amber : MiisColors.line,
+                    width: selected ? 1.5 : 1,
+                  ),
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(item.$2, style: const TextStyle(fontSize: 26)),
+                    Text(item.$2, style: const TextStyle(fontSize: 24)),
                     const SizedBox(height: 4),
-                    Text(item.$3, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700)),
+                    Text(
+                      app.t(item.$3),
+                      maxLines: 2,
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontSize: 11.5,
+                        fontWeight: FontWeight.w700,
+                        color: selected ? Colors.white : MiisColors.muted,
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -386,107 +430,145 @@ class _QuickReportScreenState extends State<QuickReportScreen> {
           spacing: 8,
           runSpacing: 8,
           children: _events.map((ev) {
-            final sel = _event == ev;
+            final sel = _event == ev.$1;
             return ChoiceChip(
-              label: Text(ev, style: TextStyle(fontSize: 12, color: sel ? Colors.black : Colors.white)),
+              label: Text(app.t(ev.$2),
+                  style: TextStyle(fontSize: 12, color: sel ? MiisColors.bg : Colors.white, fontWeight: FontWeight.w600)),
               selected: sel,
-              selectedColor: const Color(0xFF22D3EE),
-              backgroundColor: const Color(0xFF0D2036),
-              onSelected: (_) => setState(() => _event = ev),
-            );
-          }).toList(),
-        ),
-
-        const SizedBox(height: 10),
-        Row(
-          children: _conditions.map((c) {
-            final sel = _condition == c;
-            return Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 3),
-                child: OutlinedButton(
-                  style: OutlinedButton.styleFrom(
-                    backgroundColor: sel ? const Color(0xFFF59E0B) : const Color(0xFF0D2036),
-                    foregroundColor: sel ? Colors.black : Colors.white,
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                  ),
-                  onPressed: () => setState(() => _condition = c),
-                  child: Text(c, style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w800)),
-                ),
-              ),
+              showCheckmark: false,
+              selectedColor: MiisColors.amber,
+              backgroundColor: MiisColors.panel,
+              side: BorderSide(color: sel ? MiisColors.amber : MiisColors.line),
+              shape: const StadiumBorder(),
+              onSelected: (_) => setState(() {
+                _event = ev.$1;
+                _netHazard = ev.$1 == 'Entangled animal' || ev.$1 == 'Ghost net';
+                _oilHazard = ev.$1 == 'Oil pollution';
+              }),
             );
           }).toList(),
         ),
 
         const SizedBox(height: 12),
-
-        // 3. OPTIONAL PHOTO (DEFERRED FOR HARBOUR)
-        Card(
-          color: const Color(0xFF0D2036),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-          child: Padding(
-            padding: const EdgeInsets.all(12),
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    const Expanded(
-                      child: Text('3. Photo (Sent Later at Harbour)', style: TextStyle(fontWeight: FontWeight.w800)),
-                    ),
-                    ElevatedButton.icon(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF1E293B),
-                        foregroundColor: const Color(0xFF22D3EE),
-                      ),
-                      onPressed: _capturePhoto,
-                      icon: const Icon(Icons.camera_alt, size: 18),
-                      label: Text(_photoKb != null ? '${_photoKb} KB ✓' : 'Camera'),
-                    ),
-                  ],
-                ),
-                SwitchListTile(
-                  dense: true,
-                  contentPadding: EdgeInsets.zero,
-                  title: const Text('Hold photo until harbour Wi-Fi/4G', style: TextStyle(fontSize: 12)),
-                  subtitle: const Text('Sends tiny <500 B GPS beacon first on weak sea signal', style: TextStyle(fontSize: 11, color: Colors.white54)),
-                  value: _deferPhotoForHarbour,
-                  activeColor: const Color(0xFF22D3EE),
-                  onChanged: (v) => setState(() => _deferPhotoForHarbour = v),
-                ),
-                TextField(
-                  controller: _notesCtrl,
-                  decoration: InputDecoration(
-                    hintText: 'Optional note (e.g. gillnet wrapped on flipper)',
-                    filled: true,
-                    fillColor: const Color(0xFF061120),
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
-                    isDense: true,
+        Row(
+          children: _conditions.map((c) {
+            final sel = _condition == c.$1;
+            return Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 3),
+                child: OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                    backgroundColor: sel ? MiisColors.amber : MiisColors.panel,
+                    foregroundColor: sel ? MiisColors.bg : Colors.white,
+                    side: BorderSide(color: sel ? MiisColors.amber : MiisColors.line),
+                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 4),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  ),
+                  onPressed: () => setState(() => _condition = c.$1),
+                  child: Text(
+                    app.t(c.$2),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(fontSize: 11.5, fontWeight: FontWeight.w700),
                   ),
                 ),
-              ],
-            ),
+              ),
+            );
+          }).toList(),
+        ),
+        const SizedBox(height: 10),
+        MiisCard(
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+          child: Row(
+            children: [
+              Text(app.t('rep.count'), style: const TextStyle(fontWeight: FontWeight.w700)),
+              const Spacer(),
+              IconButton(
+                onPressed: _count > 1 ? () => setState(() => _count--) : null,
+                icon: const Icon(Icons.remove_circle_outline),
+              ),
+              Text('$_count', style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w800, color: MiisColors.amber)),
+              IconButton(
+                onPressed: _count < 500 ? () => setState(() => _count++) : null,
+                icon: const Icon(Icons.add_circle_outline),
+              ),
+            ],
           ),
         ),
 
-        const SizedBox(height: 16),
+        const SizedBox(height: 14),
 
-        // 4. BIG SUBMIT BUTTON
-        SizedBox(
-          width: double.infinity,
-          child: ElevatedButton.icon(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF10B981),
-              foregroundColor: Colors.black,
-              padding: const EdgeInsets.symmetric(vertical: 16),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-            ),
-            onPressed: _submitting ? null : _submitReport,
-            icon: const Icon(Icons.send),
-            label: Text(
-              _submitting ? 'SENDING GPS BEACON...' : 'SEND GPS REPORT NOW (NO LOGIN)',
-              style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 15),
-            ),
+        // 3. OPTIONAL PHOTO & GUIDED QUICK NOTES
+        MiisCard(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(app.t('rep.step3'),
+                        style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 14.5)),
+                  ),
+                  OutlinedButton.icon(
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: MiisColors.amber,
+                      side: const BorderSide(color: MiisColors.line),
+                      shape: const StadiumBorder(),
+                    ),
+                    onPressed: _capturePhoto,
+                    icon: const Icon(Icons.camera_alt_outlined, size: 17),
+                    label: Text(_photoKb != null ? '$_photoKb KB ✓' : app.t('rep.camera')),
+                  ),
+                ],
+              ),
+              SwitchListTile(
+                dense: true,
+                contentPadding: EdgeInsets.zero,
+                title: Text(app.t('rep.hold'), style: const TextStyle(fontSize: 12.5)),
+                subtitle: Text(app.t('rep.holdSub'),
+                    style: const TextStyle(fontSize: 11, color: MiisColors.faint)),
+                value: _deferPhotoForHarbour,
+                activeThumbColor: MiisColors.amber,
+                onChanged: (v) => setState(() => _deferPhotoForHarbour = v),
+              ),
+              const SizedBox(height: 6),
+              Text(app.t('rep.quickLabel'),
+                  style: const TextStyle(fontSize: 11.5, color: MiisColors.faint)),
+              const SizedBox(height: 6),
+              Wrap(
+                spacing: 6,
+                runSpacing: 6,
+                children: _quickKeys.map((k) {
+                  final txt = app.t(k);
+                  return ActionChip(
+                    label: Text('+ $txt', style: const TextStyle(fontSize: 11.5)),
+                    backgroundColor: MiisColors.bg,
+                    side: const BorderSide(color: MiisColors.line),
+                    shape: const StadiumBorder(),
+                    onPressed: () => _appendNote(txt),
+                  );
+                }).toList(),
+              ),
+              const SizedBox(height: 10),
+              TextField(
+                controller: _notesCtrl,
+                maxLines: 2,
+                decoration: InputDecoration(
+                  hintText: app.t('rep.noteHint'),
+                  fillColor: MiisColors.bg,
+                ),
+              ),
+            ],
           ),
+        ),
+
+        const SizedBox(height: 18),
+
+        // 4. SUBMIT BUTTON
+        MiisButton(
+          label: _submitting ? app.t('rep.sending') : app.t('rep.submit'),
+          icon: Icons.send,
+          onPressed: _submitting ? null : _submitReport,
         ),
       ],
     );

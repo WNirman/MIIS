@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: miis-sri-lanka-api
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node server/server.js
+    envVars:
+      - key: NODE_VERSION
+        value: "22.14.0"
+      - key: MIIS_JWT_SECRET
+        generateValue: true
+      - key: MIIS_SMS_WEBHOOK_SECRET
+        generateValue: true
+      - key: MIIS_DB_PATH
+        value: /tmp/miis.db
